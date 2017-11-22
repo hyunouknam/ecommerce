@@ -48,35 +48,59 @@
 				echo "connect database successfully\n";
 				echo "\r\n";
 			}
-		
 		$uid=mysqli_real_escape_string($conn,$_POST["uid"]);
-		//error handlers
-		//check if inputs are empty my code checks
 		$tableName='';
 		$searchId='';
 		if (strcmp($logintype,"Seller")==0){
 			$tableName="seller";
 			$searchId="SellerId";
-		}
-		else if (strcmp($logintype,"Customer")==0){
-			$tableName="customer";
-			$searchId="CustomerId";
-		}
+			$sql="SELECT  *  FROM  " ." $tableName ". " WHERE " .$searchId. "=".$uid;
+			$result=mysqli_query($conn,$sql);
+			$resultCheck=mysqli_num_rows($result);
+			if($resultCheck<1){	
+				echo "no user is found under this name";
+				header("login.php");
+				exit();
+			}
+			else if($resultCheck==1){
+				echo "Seller Login successfully!!!";
+				}
+			}
+			else if (strcmp($logintype,"Customer")==0){
+				$tableName="customer";
+				$searchId="CustomerId";
+				$sql="SELECT  *  FROM  " ." $tableName ". " WHERE " .$searchId. "=".$uid;
+				$result=mysqli_query($conn,$sql);
+				$resultCheck=mysqli_num_rows($result);
+				if($resultCheck<1){	
+					echo "no user is found under this name";
+					header("login.php");
+					exit();
+				}
+				else if($resultCheck==1){
+					echo "Customer Login successfully!!!";
+					echo "<form name ='form1' method ='post'	action='searchresults.php'>";
+					echo "<input name = 'search' type='text' size='40' maxlength='50'/>";
+					echo "<input type = 'submit' name ='submit' value='search' />";
+					echo "</form>";
+				}
+			}
 		if (strcmp($logintype,"Employee")==0){
-			$tableName="employee";
-			$searchId="EmployeeId";
-		}		
-		$sql="SELECT  *  FROM  " ." $tableName ". " WHERE " .$searchId. "=".$uid;
-		$result=mysqli_query($conn,$sql);
-		$resultCheck=mysqli_num_rows($result);
-		if($resultCheck<1){	
-			echo "no user is found under this name";
-			header("login.php");
-			exit();
-			}
-		else if($resultCheck==1){
-			echo "Login successfully!!!";
-			}
+				$tableName="employee";
+				$searchId="EmployeeId";
+				$sql="SELECT  *  FROM  " ." $tableName ". " WHERE " .$searchId. "=".$uid;
+				$result=mysqli_query($conn,$sql);
+				$resultCheck=mysqli_num_rows($result);
+				if($resultCheck<1){	
+					echo "no user is found under this name";
+					header("login.php");
+					exit();
+				}
+				else if($resultCheck==1){
+					echo "Employee Login successfully!!!" ; 
+					
+				}
+			}		
 		}
 	?>
     </div>

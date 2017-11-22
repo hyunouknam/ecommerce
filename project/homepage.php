@@ -22,7 +22,28 @@
 	<div class="main-wrapper">
 		<h2 class="h2_class">Home</h2> 
 	</div>
+	<div class ="search_class">Search the products you want to buy 
+	<form name ='form1' method ='POST'	action='searchresults.php'>
+	<input name = 'search' type='text' size='40' maxlength='50'/>
+	<input type = 'submit' name ='submit' value='search' />
+	</form>
+	</div>
+	<style>
+		.search_class{
+			background-color: tomato;
+			height:100px;
+			color: white;
+			margin:20px;
+			padding: 20px;
+			font-size:30px;			
+			text-align:center;
+			vertical-align:middle;
+	} 
+	</style>
 </section>
+
+
+
 		<div class="login_class">login as customer or employee or seller?
 		<form>
 			<?php
