@@ -131,11 +131,11 @@
 						$_SESSION['selected_signup_type']=$signuptype[$signuptype_id-1];
 						header("Location: signup.php");
 					}
-					else if( strcmp ($signuptype[$signuptype_id-1],'Employee')==0){
+					else if(strcmp($signuptype[$signuptype_id-1],'Employee')==0){
 						echo 'you selected employee type ####';
 						session_start();
 						$_SESSION['selected_signup_type']=$signuptype[$signuptype_id-1];
-						header("Location :signup.php");
+						header("Location: signup.php");
 					}		
 					
 				}

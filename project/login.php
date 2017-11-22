@@ -74,7 +74,7 @@
 			header("login.php");
 			exit();
 			}
-		else if($resultCheck>=1){
+		else if($resultCheck==1){
 			echo "Login successfully!!!";
 			}
 		}
