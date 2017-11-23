@@ -10,9 +10,10 @@
       <div class ="main-wrapper">
 		<ul>
 			<li><a href="homepage.php">Home</a> </li>
-		</ul>
-			
+		</ul>			
       </div>
+	  
+	  
     </nav>
   </header>
   

@@ -13,8 +13,7 @@ include_once 'header.php';
 <header>   
 </header>
 
- <nav>
-      <div class ="main-wrapper">
+    <div class ="main-wrapper">
 	<form class ="signin-form"  method ="POST">
 		<div class="container">
 		<label><b>ID</b></label>

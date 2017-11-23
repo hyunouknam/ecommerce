@@ -13,6 +13,9 @@
 		}	
 		return $options;
 	}
+	function print_stuff(){
+		echo "you called me ";
+	}
 ?>
 
 
