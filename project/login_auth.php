@@ -1,6 +1,7 @@
 <?php
 	include_once 'header.php'; 
 /*session will stay alive for 10 seconds if user remains idle */
+	
 	session_start();
 	$duration=60; /*60 seconds */
 	$dbServername="localhost";
@@ -8,6 +9,12 @@
 	$dbPassword="12345";
 	$dbName="ecommence"; 
 	if(isset($_POST['submit'])){
+		if (isset($_SESSION['isCustomerLogin'])){
+			echo "you have to logout the current user first";
+			header( "refresh:5;url=customerLoggedin.php?statust=error&msg=you should logout first!" );	
+			exit();
+		}
+		
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);			
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -26,7 +33,7 @@
 		$result_employee=mysqli_query($conn,$sql_employee);
 		$resultCheck_employee=mysqli_num_rows($result_employee);
 		
-		if($resultCheck_customer==1){
+		if($resultCheck_customer==1){				
 				echo "<P> customer Login successfully!!! </p>";
 				echo "<P>now directing you to search page!!! </p>";
 				$_SESSION['isCustomerLogin']=array(

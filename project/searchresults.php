@@ -4,16 +4,41 @@
 	$dbServername="localhost";
 	$dbUsername="root";
 	$dbPassword="12345";
-	$dbName="ecommence"; 	
+	$dbName="ecommence"; 
+?>	
+<section class="main-container"> 
+	<div class ="search_class">New search
+	<form name ='form1' method ='POST'	action='searchresults.php'>
+	<input name = 'search' type='text' size='40' maxlength='50'/>
+	<input type = 'submit' name ='submit' value='search' />
+	</form>
+	</div>
+	<style>
+		.search_class{
+			background-color: tomato;
+			height:50px;
+			color: white;
+			margin:10px;
+			padding: 10px;
+			font-size:20px;			
+			text-align:center;
+			vertical-align:middle;
+	} 
+	</style>
+</section>
+
+
+
+<?php 
 	echo "<div class ='wrapper'>";
 	echo "<div class='topclass'>";
 	echo "<p class='searchresults'>Search results </p>";
 	echo "<style>";
-	echo ".topclass{background-color:tomato;height:30px;margin:10px;padding:10px;};";
+	echo ".topclass{background-color:tomato;color:white;height:50px;margin:10px;padding:10px;font-size:20px;text-align:center;vertical-align:middle;};";
 	echo "</style>";
 	echo "</div>";
 	echo "<div class='resultsdive'>";
-	
+
 	if(isset($_POST['search'])){		
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
 		$ItemName= $_POST['search'];
@@ -42,13 +67,14 @@
 					
 		}
 		else{
-			echo "No results found";
+			echo "No search products found";
 		}
 	}
 echo "<style>";
-echo ".resultsdive{display:block; background-color: #92a8d1; height:300px; color: white; margin:10px; padding:10px; font-size:20px; text-align:center vertical-align:middle;autoscroll:true;}";			
+echo ".resultsdive{display:block; background-color: tomato; height:300px; color: white; margin:10px; padding:10px; font-size:20px; text-align:center vertical-align:middle;autoscroll:true;}";			
 echo "</styple>";
 echo "</form>";
 echo "</div>";
 echo "<div>";
+
 include_once 'footer.php'; ?>
