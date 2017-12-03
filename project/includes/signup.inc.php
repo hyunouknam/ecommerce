@@ -7,6 +7,7 @@
 		echo "it is CLICKED";
 		include_once "dbh.inc.php";
 		$uid=mysqli_real_escape_string($conn,$_POST['uid']);
+		$password= mysqli_real_escape_string($conn,$_POST['password']);
 		$firstname=mysqli_real_escape_string($conn,$_POST['firstname']);
 		$lastname=mysqli_real_escape_string($conn,$_POST['lastname']);
 		$address=mysqli_real_escape_string($conn,$_POST['address']);
@@ -17,7 +18,7 @@
 			exit();
 		}
 		else{
-			$sql="INSERT INTO  $tableName (SellerId, FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid, '$firstname', '$lastname', '$address', '$email', '$phone');";
+			$sql="INSERT INTO  $tableName (SellerId,Password,FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone');";
 			mysqli_query($conn,$sql);
 			exit();
 			}
@@ -30,6 +31,7 @@
 			echo "it is CLICKED";
 			include_once "dbh.inc.php";
 			$uid=mysqli_real_escape_string($conn,$_POST['uid']);
+			$password=mysqli_real_escape_string($conn,$_POST['password']);
 			$firstname=mysqli_real_escape_string($conn,$_POST['firstname']);
 			$lastname=mysqli_real_escape_string($conn,$_POST['lastname']);
 			$address=mysqli_real_escape_string($conn,$_POST['address']);
@@ -40,7 +42,7 @@
 			exit();
 			}
 			else{
-				$sql="INSERT INTO  $tableName (CustomerId, FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid, '$firstname', '$lastname', '$address', '$email', '$phone');";
+				$sql="INSERT INTO  $tableName (CustomerId,Password, FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid, '$password','$firstname', '$lastname', '$address', '$email', '$phone');";
 				mysqli_query($conn,$sql);
 				exit();
 			}
@@ -53,6 +55,7 @@
 			echo "it is CLICKED";
 			include_once "dbh.inc.php";
 			$uid=mysqli_real_escape_string($conn,$_POST['uid']);
+			$password=mysqli_real_escape_string($conn,$_POST['password']);
 			$firstname=mysqli_real_escape_string($conn,$_POST['firstname']);
 			$lastname=mysqli_real_escape_string($conn,$_POST['lastname']);
 			$address=mysqli_real_escape_string($conn,$_POST['address']);
@@ -65,7 +68,7 @@
 			exit();
 		}
 		else{
-			$sql="INSERT INTO  $tableName (EmployeeId, FirstName, LastName,  Address, Email, PhoneNumber, role,datejoined) VALUES ($uid, '$firstname', '$lastname', '$address', '$email', '$phone', '$role', '$datejoined');";
+			$sql="INSERT INTO  $tableName (EmployeeId,Password, FirstName, LastName,  Address, Email, PhoneNumber, role,datejoined) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone', '$role', '$datejoined');";
 			mysqli_query($conn,$sql);
 			exit();
 			}

@@ -11,6 +11,7 @@
 		<?php
 			if(strcmp($signuptype,"Customer")==0 ||strcmp($signuptype,"Seller")==0 ){
 				echo "<input type='text' name='uid' placeholder='UserID has to be in int' required>";
+				echo "<input type='text' name='password' placeholder='Password needs to be numbers and alphabet' required>";
 				echo "<input type='text' name='firstname' placeholder='first name in char' required>";
 				echo "<input type='text' name='lastname' placeholder='last name in char' required>";
 				echo "<input type='text' name ='address' placeholder='address in char' required>";
@@ -20,6 +21,7 @@
 			}
 			else if (strcmp($signuptype,"Employee")==0){
 				echo "<input type='text' name='uid' placeholder='UserID has to be in int' required>";
+				echo "<input type='text' name='password' placeholder='Password needs to be numbers and alphabet' required>";
 				echo "<input type='text' name='firstname' placeholder='first name in char' required>";
 				echo "<input type='text' name='lastname' placeholder='last name in char' required>";
 				echo "<input type='text' name ='address' placeholder='address in char' required>";
