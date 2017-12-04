@@ -14,7 +14,6 @@ if (isset($_POST['keepsearch'])){
 else if (isset($_POST['checkout'])){
 	header( "refresh:2;url=checkout.php" );
 	exit();	
-	
 	$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
 	$itemsInShoppingCart=$_SESSION['productsAdded'];	
 	for($i=0;$i<count($itemsInShoppingCart);$i++){

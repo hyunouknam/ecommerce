@@ -37,7 +37,7 @@
 		$resultCheck_employee=mysqli_num_rows($result_employee);
 		
 		if($resultCheck_customer==1){
-				$obj = $result_customer->fetch_object();					
+				$obj = $result_customer->fetch_object();
 				if ($password==$obj->Password){
 					echo "<P> customer Login successfully!!! </p>";
 					echo "<P>now directing you to search page!!! </p>";
@@ -45,7 +45,7 @@
 						"start"=>time(),
 						"duration"=>$duration,
 						"logintype"=>"CustomerLogin",
-						"Id"=>$resultCheck_customer['CustomerId'],
+						"Id"=>($obj->CustomerId),
 					);
 					$_SESSION['productsAdded']=array();
 					header( "refresh:5;url=customerLoggedin.php" );				

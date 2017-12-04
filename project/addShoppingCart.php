@@ -4,6 +4,7 @@
 	if (isset($_SESSION['isCustomerLogin'])){
 		$duration=$_SESSION['isCustomerLogin']['duration'];
 		$start =$_SESSION['isCustomerLogin']['start'];
+		$customerId=$_SESSION['isCustomerLogin']['Id'];
 		if ((time()-$start)>$duration){
 			echo "<p> time is OUT, you are automatically LOG OUT </p>";
 			unset($_SESSION['isCustomerLogin']['duration']);

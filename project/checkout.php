@@ -6,6 +6,9 @@
 	$dbPassword="12345";
 	$dbName="ecommence";	
 	$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
+	echo "In the checkout page the customer Id is :";
+	echo $_SESSION['isCustomerLogin']['Id'];
+	
 	$itemsInShoppingCart=$_SESSION['productsAdded'];	
 	for($i=0;$i<count($itemsInShoppingCart);$i++){
 			//echo implode("   ",$itemsInShoppingCart[$i]);
