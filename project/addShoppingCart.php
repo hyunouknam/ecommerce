@@ -18,9 +18,9 @@
 			exit();
 		}
 		else {
-			echo "you are all set!!!";
+			/*echo "you are all set!!!";
 			echo "</br>";
-			echo "and you are NOT time out!";
+			echo "and you are NOT time out!";*/
 		}
 	}	
 	else{
@@ -34,17 +34,17 @@
 	if (isset($_SESSION['searchResults'])){
 		$myData=$_SESSION['searchResults'];
 		for ($i=0; $i<count($myData);$i++){
-			echo "the stuff that's on the search results are:";
-			echo implode(" ", $myData[$i]);
-			echo "</br>";
+			//echo "the stuff that's on the search results are:";
+			//echo implode(" ", $myData[$i]);
+			//echo "</br>";
 		}	
 	}	
-	echo "  STUFF THAT'S SELECTED   ";
+	//echo "  STUFF THAT'S SELECTED   ";
 	if (isset($_POST['checkbox'])){
 		$checkbox=$_POST['checkbox'];
 		for($i=0;$i<count($checkbox);$i++){
 			$check1=$checkbox[$i];
-			echo implode(" ", $myData[$check1]);
+			echo implode("   ",$myData[$check1]);
 			echo "</br>";
 		}		
 	}

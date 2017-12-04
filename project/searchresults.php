@@ -33,12 +33,19 @@
 	echo "<div class ='wrapper'>";
 	echo "<div class='topclass'>";
 	echo "<p class='searchresults'>Search results </p>";
+	echo "<table style='width:100%'>";
+	echo "<tr>";
+	echo "<th>itemname</th>";
+	echo "<th>price</th>"; 
+	echo "<th>quantity</th>";
+	echo "</tr>";
+	echo "</table>";
 	echo "<style>";
 	echo ".topclass{background-color:tomato;color:white;height:50px;margin:10px;padding:10px;font-size:20px;text-align:center;vertical-align:middle;};";
 	echo "</style>";
 	echo "</div>";
 	echo "<div class='resultsdive'>";
-
+	
 	if(isset($_POST['search'])){		
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
 		$ItemName= $_POST['search'];
@@ -54,12 +61,15 @@
 					$row['SellerId'],
 					$row['ItemId'],
 					$row['ItemName'],
-					$row['Quantity'],
-					$row['ReviewId'],
+					$row['TotalQuantity'],
 					$row['Price']
 				);
-				array_push($myData, $dataElement);
-				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['ItemName'].'   ' .$row['Price']."</br>";
+				array_push($myData, $dataElement);				
+				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['ItemName'].' ' .$row['Price']. '  '.$row['TotalQuantity']."</br>";
+				echo "<style>";
+				echo "{}";
+				echo "</style>";
+				
 				$count=$count+1;		
 			 }while($row=mysqli_fetch_array($result));
 			echo "<input type='submit' name= 'addToCart' value='add to cart' >";	
@@ -70,6 +80,7 @@
 			echo "No search products found";
 		}
 	}
+
 echo "<style>";
 echo ".resultsdive{display:block; background-color: tomato; height:300px; color: white; margin:10px; padding:10px; font-size:20px; text-align:center vertical-align:middle;autoscroll:true;}";			
 echo "</styple>";
