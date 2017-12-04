@@ -11,6 +11,7 @@
 			unset($_SESSION['isCustomerLogin']['logintype']);
 			unset($_SESSION['isCustomerLogin']['Id']);
 			unset($_SESSION['isCustomerLogin']);	
+			unset($_SESSION['productsAdded']);
 			session_destroy();
 			echo "</br>";
 			echo "Now I am redirecting you to the Login page";		
@@ -40,19 +41,27 @@
 		}	
 	}	
 	//echo "  STUFF THAT'S SELECTED   ";
+	$myselection=$_SESSION['productsAdded'];
 	if (isset($_POST['checkbox'])){
 		$checkbox=$_POST['checkbox'];
 		for($i=0;$i<count($checkbox);$i++){
 			$check1=$checkbox[$i];
-			echo implode("   ",$myData[$check1]);
+			//echo implode("   ",$myData[$check1]);
+			array_push($myselection, $myData[$check1]);
 			echo "</br>";
 		}		
 	}
+	$_SESSION['productsAdded']=$myselection;
+	
+	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+			echo implode("   ",$_SESSION['productsAdded'][$i]);
+			echo "</br>";
+	}	
 	
 ?>
 <div class ="checkout">
 	<form method='POST' action= 'checkoutOrKeepShopping.php'>;
-	<input type='submit' name= 'checkout' value='KEEPshoping' >
+	<input type='submit' name= 'keepsearch' value='KEEPshoping' >
 	<input type='submit' name= 'checkout' value='CHECKOUT' >
 	</form>
 </div>
