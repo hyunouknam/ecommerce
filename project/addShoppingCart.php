@@ -49,6 +49,16 @@
 		}		
 	}
 	
-	
+?>
+<div class ="checkout">
+	<form method='POST' action= 'checkoutOrKeepShopping.php'>;
+	<input type='submit' name= 'checkout' value='KEEPshoping' >
+	<input type='submit' name= 'checkout' value='CHECKOUT' >
+	</form>
+</div>
+
+<?php	
 	include_once 'footer.php';
 ?>
+
+

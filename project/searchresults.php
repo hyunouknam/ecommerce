@@ -66,10 +66,8 @@
 				);
 				array_push($myData, $dataElement);				
 				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['ItemName'].' ' .$row['Price']. '  '.$row['TotalQuantity']."</br>";
-				echo "<style>";
-				echo "{}";
-				echo "</style>";
-				
+				//echo "<a href = 'detail.php'> {$row['ItemName']}</a><br>\n";
+								
 				$count=$count+1;		
 			 }while($row=mysqli_fetch_array($result));
 			echo "<input type='submit' name= 'addToCart' value='add to cart' >";	
