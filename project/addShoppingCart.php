@@ -49,14 +49,19 @@
 			//echo implode("   ",$myData[$check1]);
 			array_push($myselection, $myData[$check1]);
 			echo "</br>";
-		}		
-	}
-	$_SESSION['productsAdded']=$myselection;
-	
-	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+		}	
+		$_SESSION['productsAdded']=$myselection;	
+		for($i=0;$i<count($_SESSION['productsAdded']);$i++){
 			echo implode("   ",$_SESSION['productsAdded'][$i]);
 			echo "</br>";
-	}	
+		}	
+	}
+	else {
+		echo "Please select an item to shoppingcart!";
+		header( "refresh:2;url=searchresults.php" );
+		exit();
+	}
+	
 	
 ?>
 <div class ="checkout">
