@@ -18,10 +18,23 @@
 			exit();
 		}
 		else{
-			$sql="INSERT INTO  $tableName (SellerId,Password,FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone');";
-			mysqli_query($conn,$sql);
-			exit();
+			$sql_seller= "SELECT * FROM seller WHERE SellerId". " = ".$uid;
+			$result_seller=mysqli_query($conn,$sql_seller);
+			$resultCheck_seller=mysqli_num_rows($result_seller);
+			if($resultCheck_seller>=1){
+				echo "seller Id already exists!";
+				header( "refresh:5;url=signup.php?statust=error&msg=Id already exists!" );	
+				exit();
 			}
+			else{
+				$sql="INSERT INTO  $tableName (SellerId,Password,FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone');";
+				mysqli_query($conn,$sql);
+				echo "successfully signed up, redirecting you to homepage ......";
+				header( "refresh:5;url=homepage.php" );	
+				exit();
+			}
+		 }
+		
 		}	
 	}
 	else if (strcmp($signuptype,"Customer")==0){
@@ -39,12 +52,25 @@
 			$phone=mysqli_real_escape_string($conn,$_POST['phone']); 
 			if(!preg_match("/^[0-9]/",$uid)){
 				header("Location: ../signup.php? signup=invalid");
-			exit();
+				exit();
 			}
 			else{
-				$sql="INSERT INTO  $tableName (CustomerId,Password, FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid, '$password','$firstname', '$lastname', '$address', '$email', '$phone');";
-				mysqli_query($conn,$sql);
-				exit();
+				$sql_customer= "SELECT * FROM customer WHERE CustomerId". " = ".$uid;
+				$result_customer=mysqli_query($conn,$sql_customer);
+				$resultCheck_customer=mysqli_num_rows($result_customer);
+				if($resultCheck_customer>=1){
+					echo "customer Id already exists!";
+					header( "refresh:5;url=signup.php?statust=error&msg=Id already exists!" );	
+					exit();
+				}
+				else{
+					$sql="INSERT INTO  $tableName (CustomerId,Password,FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone');";
+					mysqli_query($conn,$sql);
+					echo "successfully signed up, redirecting you to homepage ......";
+					header( "refresh:5;url=homepage.php" );	
+					exit();
+				}
+		
 			}
 		}	
 	}
@@ -68,9 +94,21 @@
 			exit();
 		}
 		else{
-			$sql="INSERT INTO  $tableName (EmployeeId,Password, FirstName, LastName,  Address, Email, PhoneNumber, role,datejoined) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone', '$role', '$datejoined');";
-			mysqli_query($conn,$sql);
-			exit();
+				$sql_employee= "SELECT * FROM employee WHERE EmployeeId". " = ".$uid;
+				$result_employee=mysqli_query($conn,$sql_employee);
+				$resultCheck_employee=mysqli_num_rows($result_employee);
+				if($resultCheck_employee>=1){
+					echo "employee Id already exists!";
+					header( "refresh:5;url=signup.php?statust=error&msg=Id already exists!" );	
+					exit();
+				}
+				else{
+					$sql="INSERT INTO  $tableName (EmployeeId,Password,FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone');";
+					mysqli_query($conn,$sql);
+					echo "successfully signed up, redirecting you to homepage ......";
+					header( "refresh:5;url=homepage.php" );	
+					exit();
+				}
 			}
 		}	
 	}		
