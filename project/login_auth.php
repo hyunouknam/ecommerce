@@ -1,7 +1,6 @@
 <?php
 	include_once 'header.php'; 
 /*session will stay alive for 10 seconds if user remains idle */
-	
 	session_start();
 	$duration=60; /*60 seconds */
 	$dbServername="localhost";
@@ -13,8 +12,7 @@
 			echo "you have to logout the current user first";
 			header( "refresh:5;url=customerLoggedin.php?statust=error&msg=you should logout first!" );	
 			exit();
-		}
-		
+		}		
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);			
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -66,7 +64,7 @@
 						"start"=>time(),
 						"duration"=>$duration,
 						"logintype"=>"SellerLogin",
-						"Id"=>$resultCheck_seller['SellerId'],
+						"Id"=>($obj->SellerId),
 					);
 					header( "refresh:5;url=sellerLoggedin.php" );				
 					exit();
@@ -86,7 +84,7 @@
 						"start"=>time(),
 						"duration"=>$duration,
 						"logintype"=>"EmployeeLogin",
-						"Id"=>$resultCheck_customer['EmployeeId'],
+						"Id"=>($obj->EmployeeId),
 					);
 					header( "refresh:5;url=employeeLoggedin.php" );				
 					exit();	

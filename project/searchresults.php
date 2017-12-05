@@ -61,12 +61,12 @@
 					$row['SellerId'],
 					$row['ItemId'],
 					$row['ItemName'],
-					$row['TotalQuantity'],
+					$row['Quantity'],
 					$row['Price']
 				);
 				array_push($myData, $dataElement);				
-				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['ItemName'].' ' .$row['Price']. '  '.$row['TotalQuantity']."</br>";
-				//echo "<a href = 'detail.php'> {$row['ItemName']}</a><br>\n";
+				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['ItemName'].' ' .$row['Price']. '  '.$row['Quantity']."</br>";
+				echo  "<a href = 'detail.php'> {$row['ItemName']}</a><br>\n";
 								
 				$count=$count+1;		
 			 }while($row=mysqli_fetch_array($result));
