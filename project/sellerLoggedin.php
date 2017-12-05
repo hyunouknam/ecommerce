@@ -21,69 +21,85 @@
 <?php
 	
 	if (isset($_POST['submit_seeitems'])){
-		echo "<div class ='wrapper'>";
-		echo "<div class='topclass'>";
-		echo "<p class='searchresults'>Items in your shop </p>";
-		echo "<table style='width:100%'>";
-		echo "<tr>";
-		echo "<th>itemname</th>";
-		echo "<th>price</th>"; 
-		echo "<th>quantity</th>";
-		echo "</tr>";
-		echo "</table>";
-		echo "<style>";
-		echo ".topclass{background-color:tomato;color:white;height:50px;margin:10px;padding:10px;font-size:20px;text-align:center;vertical-align:middle;};";
-		echo "</style>";
-		echo "</div>";
-		echo "<div class='resultsdive'>";
+		echo "<table border=1> <tr> <th>Item Name</th> <th>Item Price</th> <th>Quantity</th></tr>";	
 		$dbServername="localhost";
 		$dbUsername="root";
 		$dbPassword="12345";
-		$dbName="ecommence"; 
+		$dbName="ecommence";		
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
 		$sql= "SELECT * FROM inventory WHERE SellerId = ".$SellerId. ";";
 		$result=mysqli_query($conn,$sql);
-		if(mysqli_num_rows($result)==0){
-			echo "you don't have any item in your shop!";
-		}
-		else if (mysqli_num_rows($result)!=0){
-			echo "<form method='POST' action= 'addShoppingCart.php'>";
-			$row=mysqli_fetch_array($result);
-			$count=0;
-			do{					
-				$dataElement=array(
-					$row['SellerId'],
-					$row['ItemId'],
-					$row['ItemName'],
-					$row['Quantity'],
-					$row['Price']
-				);
-			echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['ItemName'].' ' .$row['Price']. '  '.$row['Quantity']."</br>";
-			//echo "<tr>";
-			//echo "<td> itemname</td>";
-			//echo "<td> item id</td>";
-			//echo "<td><input type='text' value='shya' name='updatequantity'></td>";
-			//echo "</tr>";
-			//echo "<tr>";
-			//echo "<td> DELETE</td>";
-			//echo "<td> what </td>";
-			//echo "<td><input type='text' value='shya'></td>";
-			//echo "</tr>";
-			
-			$count=$count+1;
+		if(mysqli_num_rows($result)!=0){
+		$row=mysqli_fetch_array($result);	
+		do {
+		echo "<form action='sellerLoggedin.php' method='POST'>";
+		echo "<tr>";
+		echo "<td>" . $row['ItemName']. " </td>"; 
+		echo "<td>" ."<input type=text name= ItemPrice value= ". $row['Price']. " </td>"; 
+		echo "<td>" ."<input type=text name= Quantity value= ". $row['Quantity']. " </td>";
+		echo "<td>" ."<input type=submit name= update value= update ". " </td>";
+		echo "</tr>";
+		echo "</form>"; 
 		 }while($row=mysqli_fetch_array($result));
 		}	
-	echo "<input type='submit' value='delete selected item' name='submit_deleteitem' >";
-	echo "<style>";
-	echo ".resultsdive{display:block; background-color: tomato; height:300px; color: white; margin:10px; padding:10px; font-size:20px; text-align:center vertical-align:middle;autoscroll:true;}";			
-	echo "</styple>";
-	echo "</form>";
-	echo "</div>";
-	echo "<div>";
 	}
 		else if (isset($_POST['submit_additems'])){
-		header( "refresh:2;url=selleradditem.php" );
-		exit();	
+		echo "<section class='main-container'> ";
+		echo "<div class='main-wrapper'>";
+		echo "<h2>add items to shop</h2>";
+		echo "<form class='sellerupdate-form'  method='POST'>";
+		echo "<input type='text' name='itemname' placeholder='itemname' required>";
+		echo "<input type='text' name='price' placeholder='price in $' required>";
+		echo "<input type='text' name='quantity' placeholder='quantity' required>";
+		echo "<input type='submit' value='add' name='submit_add' >";
+		echo "</form>";
+		echo "</div>";
+		echo "<style>";
+		echo ".sellerupdate-form{ width:400px; margin:0 auto; padding-top:30px;	}";
+		echo ".sellerupdate-form input{float:left; width:90%; height:40px; padding:0px 5%;
+		margin-right:10px;
+		margin-bottom:4px;
+		border:none;
+		background-color:#fff;
+		font-family:arial;
+		font-size:16px;
+		color: #111;
+		line-height:40px;}
+	</style>
+</section>";
+
+	$dbServername="localhost";
+	$dbUsername="root";
+	$dbPassword="12345";
+	$dbName="ecommence"; 
+	if(isset($_POST['submit_add'])){
+		$ItemName=$_POST['itemname'];
+		$price=$_POST['price'];
+		$quantity=$_POST['quantity'];
+		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
+		$sql= "SELECT * FROM inventory WHERE SellerId = ". $SellerId ." AND ItemName = "."'".$ItemName."'".";"; 
+		$result=mysqli_query($conn,$sql);
+		$resultCheck=mysqli_num_rows($result);		
+		if($resultCheck>=1){
+			echo "there is this item in shop, will not update the price just update the quantity is fine!";
+			$row=mysqli_fetch_array($result);
+			$oldQuantity=$row['Quantity'];
+			$newQuantity= $quantity+$oldQuantity;
+			$sql= "UPDATE inventory set Quantity = ".$newQuantity. " WHERE SellerId =  ". $SellerId ." AND ItemName = "."'".$ItemName."'".";";
+			echo $sql;
+			mysqli_query($conn,$sql);
+			echo "<br>";
+			echo "Just updated";
+			exit();
+		}
+		else if ($resultCheck==0){
+			echo "there is no such stuff in shop, now adding the stuff!";
+			$sql= "INSERT INTO inventory (SellerId, ItemName, Quantity, Price ) VALUES (" .$SellerId .","."' " .$ItemName." '". " , ". $quantity. " , ". $price. ");";
+			echo $sql;
+			mysqli_query($conn,$sql);
+		}
+	}
+ 
 	}
 
 
