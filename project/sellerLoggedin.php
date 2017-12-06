@@ -63,7 +63,7 @@
 		mysqli_query($conn,$sql_update);	 
 	}
 	if (isset($_POST['update_SellerInfor'])){
-		$sql_update="UPDATE seller SET Password = "."'".$_POST['Password'] ."',"." FirstName= "."'". $_POST['FirstName'] ."',"." LastName = "."'". $_POST['LastName']. "',"." Address = "."'".$_POST['Address']."',"." Email = '".$_POST['Email']."', "."PhoneNumber =' ".$_POST['PhoneNumber']."';";
+		$sql_update="UPDATE seller SET Password = "."'".$_POST['Password'] ."',"." FirstName= "."'". $_POST['FirstName'] ."',"." LastName = "."'". $_POST['LastName']. "',"." Address = "."'".$_POST['Address']."',"." Email = '".$_POST['Email']."', "."PhoneNumber =' ".$_POST['PhoneNumber']."' WHERE SellerId = ".$SellerId.";";
 		$dbServername="localhost";
 		$dbUsername="root";
 		$dbPassword="12345";
