@@ -64,9 +64,13 @@
 					$row['Quantity'],
 					$row['Price']
 				);
-				array_push($myData, $dataElement);				
-				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['ItemName'].' ' .$row['Price']. '  '.$row['Quantity']."</br>";
-				echo  "<a href = 'detail.php'> {$row['ItemName']}</a><br>\n";
+
+				array_push($myData, $dataElement);
+
+				$_SESSION['itemid'] = $dataElement[1];
+				echo "<a href='detail.php?itemid=$dataElement[1]'>{$row['ItemName']}</a>";
+
+				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['Price']. '  '.$row['Quantity']."</br>";
 								
 				$count=$count+1;		
 			 }while($row=mysqli_fetch_array($result));
