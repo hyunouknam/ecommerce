@@ -103,7 +103,7 @@
 					exit();
 				}
 				else{
-					$sql="INSERT INTO  $tableName (EmployeeId,Password,FirstName, LastName,  Address, Email, PhoneNumber) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone');";
+					$sql="INSERT INTO  $tableName (EmployeeId,Password,FirstName, LastName,  Address, Email, PhoneNumber,Role, DateJoined) VALUES ($uid,'$password', '$firstname', '$lastname', '$address', '$email', '$phone','$role','$datejoined');";
 					mysqli_query($conn,$sql);
 					echo "successfully signed up, redirecting you to homepage ......";
 					header( "refresh:5;url=homepage.php" );	
