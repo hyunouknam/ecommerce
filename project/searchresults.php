@@ -64,6 +64,7 @@
 					$row['Quantity'],
 					$row['Price']
 				);
+
 				array_push($myData, $dataElement);
 
 				$_SESSION['itemid'] = $dataElement[1];
