@@ -58,7 +58,35 @@
 
 ?>
 
+
+
 <?php
-	
+
+	if (isset($_SESSION['isCustomerLogin'])){
+		echo '<section class="main-container">';
+		echo '<div class="main-wrapper">';
+		echo "<h2>Write Review</h2>";
+		echo '<form class="signup-form"  method="POST">';
+		echo '<input type="text" name="rating" placeholder="Rate from 1 - 5" required>';
+		echo '<input type="text" name="detailedreview" placeholder="Write your thoughts on the item..." required>';
+		echo '<input type="submit" value="submit" name="submit" >';
+
+		echo "</form>";
+		echo "</div>";
+		echo "</section>";
+	}
+
+	if(isset($_POST['submit'])){ 
+
+			$rating=mysqli_real_escape_string($conn,$_POST['rating']);
+			$detailedreview=mysqli_real_escape_string($conn,$_POST['detailedreview']);
+
+			$tableName = "Review";
+			$zero = 0;
+
+			$sql="INSERT INTO  $tableName (ReviewId, ItemId, Rating, DetailedReview) VALUES ($zero, $itemid, $rating, '$detailedreview');";
+			mysqli_query($conn,$sql);
+			header("Refresh:0");
+	}
 
 ?>
