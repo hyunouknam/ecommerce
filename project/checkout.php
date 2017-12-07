@@ -1,6 +1,26 @@
 <?php
 	include_once 'header.php'; 
 	session_start();
+	//$itemsInShoppingCart=$_SESSION['productsAdded'];
+	echo "<section class='main-container'> ";
+	echo "<div class='main-wrapper'>";
+	echo "<p1> Items in shopping cart </p1>";
+	echo "<table border=1><tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Item Price</th><th>Quantity</th></tr>";	
+	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+		echo "<form action='addShoppingCart.php' method='POST'>";
+		echo "<tr>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
+		echo "<td>" .$_SESSION['productsAdded'][$i][1]. " </td>"; 
+		echo "<td>" .$_SESSION['productsAdded'][$i][2]. " </td>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][4]. " </td>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][5]. " </td>";
+		echo "</tr>";
+		echo "</form>"; 
+	}
+	echo "</div>";
+	echo "</section>";
+	
+	
 	$dbServername="localhost";
 	$dbUsername="root";
 	$dbPassword="12345";

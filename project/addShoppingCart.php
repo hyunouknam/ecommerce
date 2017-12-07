@@ -34,82 +34,83 @@
 	}	
 	$myData=array(array());
 	if (isset($_SESSION['searchResults'])){
-		$myData=$_SESSION['searchResults'];
-		for ($i=0; $i<count($myData);$i++){
-			//echo "the stuff that's on the search results are:";
-			//echo implode(" ", $myData[$i]);
-			//echo "</br>";
-		}	
+		$myData=$_SESSION['searchResults']; // array in search results	
 	}	
-	//echo "  STUFF THAT'S SELECTED   ";
-	$myselection=$_SESSION['productsAdded'];
+	$myselection=$_SESSION['productsAdded']; // stuff that's selected
 	if (isset($_POST['checkbox'])){
 		$checkbox=$_POST['checkbox'];
 		for($i=0;$i<count($checkbox);$i++){
-			$check1=$checkbox[$i];// the item I selected;
-			//echo $myData[$check1][1];
-			//echo "dddddd";
-			//echo "<br>";
+			$check1=$checkbox[$i];
 			$check_index=-1;
-			for ($k=0;$k<count($myselection);$k++){
-				//echo "item ID??";
-				//echo "<br>";				
+			for ($k=0;$k<count($myselection);$k++){ // if item was previously selected 
 				if ($myselection[$k][1]==$myData[$check1][1]){
-					$myselection[$k][5]=$myselection[$k][5]+1;
+					$myselection[$k][5]=$myselection[$k][5]+1; // update quantity only
 					$check_index=$k;
 				}
 			}
-			if ($check_index==-1){	
-			 array_push($myData[$check1],1); 
-			 array_push($myselection, $myData[$check1]);
-			 echo "</br>";
+			if ($check_index==-1){	// if item is not in list, new item is selected 
+			  array_push($myData[$check1],1); 
+			  array_push($myselection, $myData[$check1]);
 			}
 		}	
 		$_SESSION['productsAdded']=$myselection;
-		// this make sure you can keep shpping
-		//for($i=0;$i<count($_SESSION['productsAdded']);$i++){
-			//echo implode("   ",$_SESSION['productsAdded'][$i]);
-			//echo "<br>";
-			//echo $_SESSION['productsAdded'][$i][1];
-			//echo "</br>";
-		//}	
-	
-
-		for($i=0;$i<count($_SESSION['productsAdded']);$i++){
-			echo "<form action='addShoppingCart.php' method='POST'>";
-			echo "<tr>";
-			echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
-			echo "<td>" .$_SESSION['productsAdded'][$i][1]. " </td>"; 
-			echo "<td>" .$_SESSION['productsAdded'][$i][2]. " </td>";
-			echo "<td>" .$_SESSION['productsAdded'][$i][4]. " </td>";
-			echo "<td>" ."<input type=text name= Quantity value= ". $_SESSION['productsAdded'][$i][5]. " </td>";
-			echo "<td>" ."<input type=hidden name= hidden_ItemId value= ".$_SESSION['productsAdded'][$i][1]. " </td>";
-			echo "<td>" ."<input type=submit name= update_shoppingcart value= update_quantity ". " </td>";
-			echo "</tr>";
-			echo "</form>"; 
+	echo "<table border=1> <tr>     <th>                  SellerId               </th><th>ItemId</th> <th>ItemName</th>                    <th>Item Price</th>    <th>Quantity</th>  </tr>";	
+	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+		echo "<form action='addShoppingCart.php' method='POST'>";
+		echo "<tr>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
+		echo "<td>" .$_SESSION['productsAdded'][$i][1]. " </td>"; 
+		echo "<td>" .$_SESSION['productsAdded'][$i][2]. " </td>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][4]. " </td>";
+		echo "<td>" ."<input type=text name= Quantity value= ". $_SESSION['productsAdded'][$i][5]. " </td>";
+		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ".$_SESSION['productsAdded'][$i][1]. " </td>";
+		echo "<td>" ."<input type=submit name= update_shoppingcart value= update_quantity ". " </td>";
+		echo "</tr>";
+		echo "</form>"; 
 		}
 	}
-	else {
-		echo "Please select an item to shoppingcart!";
-		header( "refresh:2;url=searchresults.php" );
-		exit();
+	if (isset($_POST['update_shoppingcart'])){
+		$myData=$_SESSION['searchResults'];
+		$myselection=$_SESSION['productsAdded'];
+		$itemId=$_POST['hidden_ItemId'];
+		for ($i=0; $i<count($myselection);$i++){
+			if ($myselection[$i][1]==$itemId){
+				$myselection[$i][5]=$_POST['Quantity'];
+			}
+		}
+		$_SESSION['productsAdded']=$myselection;
 	}
-	
-	
 ?>
-
-
- 
+<div class ="seewhat's in shopping cart">
+	<form method='POST' action= 'addShoppingCart.php'>
+	<input type='submit' name= 'ShoppingCart' value='ShoppingCart' >
+	</form>
+</div>
 
 
 <div class ="checkout">
-	<form method='POST' action= 'checkoutOrKeepShopping.php'>;
+	<form method='POST' action= 'checkoutOrKeepShopping.php'>
 	<input type='submit' name= 'keepsearch' value='KEEPshoping' >
 	<input type='submit' name= 'checkout' value='CHECKOUT' >
 	</form>
 </div>
 
 <?php	
+	if (isset($_POST['ShoppingCart'])){
+		for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+		echo "<form action='addShoppingCart.php' method='POST'>";
+		echo "<tr>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
+		echo "<td>" .$_SESSION['productsAdded'][$i][1]. " </td>"; 
+		echo "<td>" .$_SESSION['productsAdded'][$i][2]. " </td>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][4]. " </td>";
+		echo "<td>" ."<input type=text name= Quantity value= ". $_SESSION['productsAdded'][$i][5]. " </td>";
+		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ".$_SESSION['productsAdded'][$i][1]. " </td>";
+		echo "<td>" ."<input type=submit name= update_shoppingcart value= update_quantity ". " </td>";
+		echo "</tr>";
+		echo "</form>"; 
+		}
+	}
 	include_once 'footer.php';
 ?>
 
