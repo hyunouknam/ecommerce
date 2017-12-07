@@ -66,12 +66,9 @@
 				);
 
 				array_push($myData, $dataElement);
-
 				$_SESSION['itemid'] = $dataElement[1];
 				echo "<a href='detail.php?itemid=$dataElement[1]'>{$row['ItemName']}</a>";
-
 				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['Price']. '  '.$row['Quantity']."</br>";
-								
 				$count=$count+1;		
 			 }while($row=mysqli_fetch_array($result));
 			echo "<input type='submit' name= 'addToCart' value='add to cart' >";	

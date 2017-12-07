@@ -9,9 +9,27 @@
 	$dbName="ecommence"; 
 	if(isset($_POST['submit'])){
 		if (isset($_SESSION['isCustomerLogin'])){
-			echo "you have to logout the current user first";
-			header( "refresh:5;url=customerLoggedin.php?statust=error&msg=you should logout first!" );	
-			exit();
+			$duration=$_SESSION['isCustomerLogin']['duration'];
+			$start =$_SESSION['isCustomerLogin']['start'];
+			echo time()-$start;
+			echo "<br>";
+			echo $duration;
+			echo "<br>";
+			
+			if ((time()-$start)>$duration){
+				echo "<p> YOU OUT </p>";
+				unset($_SESSION['isCustomerLogin']['duration']);
+				unset($_SESSION['isCustomerLogin']['start']);
+				unset($_SESSION['isCustomerLogin']['logintype']);
+				unset($_SESSION['isCustomerLogin']['Id']);
+				unset($_SESSION['isCustomerLogin']);
+				session_destroy();
+			}		
+			else{
+				echo "you have to logout the current user first";
+				header( "refresh:5;url=customerLoggedin.php?statust=error&msg=you should logout first!" );	
+				exit();
+			}
 		}		
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);			
 		if ($conn->connect_error) {
