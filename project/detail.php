@@ -84,9 +84,15 @@
 			$tableName = "Review";
 			$zero = 0;
 
-			$sql="INSERT INTO  $tableName (ReviewId, ItemId, Rating, DetailedReview) VALUES ($zero, $itemid, $rating, '$detailedreview');";
+			date_default_timezone_set("America/New_York");
+
+			$date = date('Y-m-d');
+			$sql="INSERT INTO  $tableName (ReviewId, ItemId, Rating, DetailedReview, DatePosted) VALUES ($zero, $itemid, $rating, '$detailedreview', '$date');";
 			mysqli_query($conn,$sql);
 			header("Refresh:0");
+
+			unset($_POST['submit']);
 	}
 
+	// HAVE TO ADD DATE POSTED!!!!!!!!!!!!!!
 ?>
