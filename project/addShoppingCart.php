@@ -80,6 +80,10 @@
 		}
 		$_SESSION['productsAdded']=$myselection;
 	}
+
+	echo "<style>";
+	echo "table, th, td {border: 2px solid white;vertical-align:middle;padding: 2px;}";			
+	echo "</styple>";
 ?>
 <div class ="seewhat's in shopping cart">
 	<form method='POST' action= 'addShoppingCart.php'>
