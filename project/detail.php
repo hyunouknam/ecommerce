@@ -8,6 +8,7 @@
 
 <?php
 	$itemid = $_GET['itemid'];
+	$_SESSION['itemid'] = $itemid;
 	$customerid = $_SESSION['isCustomerLogin']['Id'];
 
 		// show item information
@@ -29,7 +30,7 @@
 
 			array_push($myData, $dataElement);
 
-			echo "<br>".$row['ItemName']. ' ' .$row['Price']. '  '.$row['Quantity']."</br>";
+			echo "<br>".$row['ItemName']. ' | Price: ' .$row['Price']. ' | Quantity: '.$row['Quantity']."</br>";
 		}
 
 		echo "<br>Customer Reviews</br>";
@@ -56,7 +57,7 @@
 				echo "--------------------------------------------------------------------------------------------------------------------------------------";
 
 				echo "<br> Rating: ".$row['Rating']. "</br>";
-				echo "<br>" .$row['DetailedReview']. ' ' .$row['DatePosted']. "</br>";
+				echo "<br>" .$row['DetailedReview']. ' | ' .$row['DatePosted']. "</br>";
 
 				///
 				$cid = $row['CustomerId'];
@@ -79,6 +80,9 @@
 
 					echo "<br>".$row2['FirstName']. ' ' .$row2['LastName']. "</br>";
 
+					if($cid == $customerid){
+						//echo '<input type="delete" name="deleteReview" value="'.$row['ReviewId'].'" /></td>"';
+					}
 				}
 				///
 
@@ -110,6 +114,13 @@
 	if(isset($_POST['submit'])){ 
 
 			$rating=mysqli_real_escape_string($conn,$_POST['rating']);
+
+			if($rating < 1 || $rating > 5){
+				$message = "Please use a number between 1 and 5";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+				exit;
+			}
+
 			$detailedreview=mysqli_real_escape_string($conn,$_POST['detailedreview']);
 
 			$tableName = "Review";
@@ -122,7 +133,8 @@
 			$sql="INSERT INTO  $tableName (ReviewId, ItemId, Rating, DetailedReview, DatePosted, CustomerId) VALUES ($zero, $itemid, $rating, '$detailedreview', '$date', '$customerid');";
 			mysqli_query($conn,$sql);
 			//unset($_POST['submit']);
-			header("Refresh:0");
+			//header("Refresh:0");
+			header('Location: redirect.php');
 			exit;
 	}
 
