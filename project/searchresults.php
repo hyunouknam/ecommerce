@@ -30,19 +30,6 @@
 
 <?php 
 	echo "<div class ='wrapper'>";
-	echo "<div class='topclass'>";
-	echo "<p class='searchresults'>Search results </p>";
-	echo "<table style='width:100%'>";
-	echo "<tr>";
-	echo "<th>itemname</th>";
-	echo "<th>price</th>"; 
-	echo "<th>quantity</th>";
-	echo "</tr>";
-	echo "</table>";
-	echo "<style>";
-	echo ".topclass{background-color:tomato;color:white;height:50px;margin:10px;padding:10px;font-size:20px;text-align:center;vertical-align:middle;};";
-	echo "</style>";
-	echo "</div>";
 	echo "<div class='resultsdive'>";
 	
 	if(isset($_POST['search'])){		
@@ -54,7 +41,15 @@
 			echo "<form method='POST' action= 'addShoppingCart.php'>";
 			$count=0;
 			$row=mysqli_fetch_array($result);			
-			$myData=array();			
+			$myData=array();
+			echo "<p class='searchresults'>Search results </p></br>";
+			echo "<table style='width:80%'>";
+			echo "<tr>";
+			echo "<th>Check</th>";
+			echo "<th>Item Name</th>";
+			echo "<th>Price</th>"; 
+			echo "<th>Quantity</th>";
+			echo "</tr>";	
 			do{					
 				$dataElement=array(
 					$row['SellerId'],
@@ -66,10 +61,13 @@
 
 				array_push($myData, $dataElement);
 				$_SESSION['itemid'] = $dataElement[1];
-				echo "<a href='detail.php?itemid=$dataElement[1]'>{$row['ItemName']}</a>";
-				echo "<input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count />".$row['Price']. '  '.$row['Quantity']."</br>";
+				echo "<tr>";
+				echo "<th><input type = 'checkbox' method='POST' name ='checkbox[]'.$count. value=$count /></th>";
+				echo "<th><a href='detail.php?itemid=$dataElement[1]'>{$row['ItemName']}</a></th><th>".$row['Price']. '</th><th>'.$row['Quantity']."</th>";
+				echo "</tr>";
 				$count=$count+1;		
 			 }while($row=mysqli_fetch_array($result));
+			echo "</table>";
 			echo "<input type='submit' name= 'addToCart' value='add to cart' >";	
 			$_SESSION['searchResults']=$myData;
 					
@@ -80,10 +78,13 @@
 	}
 
 echo "<style>";
-echo ".resultsdive{display:block; background-color: tomato; height:300px; color: white; margin:10px; padding:10px; font-size:20px; text-align:center vertical-align:middle;autoscroll:true;}";			
+echo ".resultsdive{display:block; background-color: tomato; height:300px; color: white; margin:10px; padding:10px; font-size:20px; text-align:center vertical-align:middle;autoscroll:true;}table, th, td {
+    border: 2px solid white;
+    vertical-align:middle;
+	padding: 2px;}";			
 echo "</styple>";
 echo "</form>";
 echo "</div>";
-echo "<div>";
+echo "</div>";
 
 include_once 'footer.php'; ?>
