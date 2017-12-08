@@ -108,7 +108,7 @@
 		do {
 		echo "<form action='employeeLoggedin.php' method='POST'>";
 		echo "<tr>";
-		echo "<td>" ."<input type=text name= SellerId value= ". $row['SellerId']. " </td>";
+		echo "<td>" . $row['SellerId']. " </td>";
 		echo "<td>" ."<input type=text name= ItemId value= ". $row['ItemId']. " </td>";
 		echo "<td>" ."<input type=text name= ItemName value= ". $row['ItemName']. " </td>"; 
 		echo "<td>" ."<input type=text name= ItemPrice value= ". $row['Price']. " </td>"; 

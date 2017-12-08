@@ -45,11 +45,13 @@ else if(isset($_POST['submit_logout'])){
 		header( "refresh:3;url=homepage.php" );
 }
 else if (isset($_POST['checkout'])){
+	 $totalChargeForItems=0;
 	// items in shopping cart 
 	$itemsInShoppingCart=$_SESSION['productsAdded'];
 	echo "<p1> Items in shopping cart </p1>";
 	echo "<table border=1><tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Price</th><th>Quantity</th></tr>";	
 	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+		$_SESSION['totalCharge']=$totalChargeForItems+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
 		echo "<form method='POST'>";
 		echo "<tr>";
 		echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
@@ -89,6 +91,7 @@ else if (isset($_POST['checkout'])){
 		echo "<form  method='POST'>";
 		echo "<tr>";
 		$_SESSION['shipInfor']=array('next-day','USPS',10.00);
+		$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['shipInfor'][2];
 		echo "<td>" ."<input type=text name= shipmentdetail value= ". "next-day". " ></td>"; 
 		echo "<td>" ."<input type=text name= shipmenttype value= "."USPS". " ></td>"; 
 		echo "<td>" ."shipCharge ". "10.00 ". "</td>";
@@ -107,7 +110,10 @@ else if (isset($_POST['checkout'])){
 		echo "<td>" ."<input type=text name= CardNumber value= "." ". "> </td>";
 		echo "<td>" ."<input type=submit name= update_payment value= useThisPayment ". " </td>";
 		echo "</tr>";
-		echo "</form>"; 
+		echo "</form>";		
+		// NOW ECHO THE TOTAL CHARGE INCLUSING THE SHIPPING 
+		echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
+		echo "<table border=1> <tr><th>".$_SESSION['totalCharge']."</th></tr>";	
 }
 	if (isset($_POST['update_shippingAddress'])){
 		$shippingAddress=array();
@@ -128,16 +134,37 @@ else if (isset($_POST['checkout'])){
 		$dbName="ecommence"; 
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
 		$sql_search_ship_charge= "SELECT * FROM shipment WHERE ShipmentDetail = ". "'".$_POST['shipmentdetail']."'"." AND ShipmentType = "."'". $_POST['shipmenttype']."'". ";";
-		//echo $sql_search_ship_charge;
 		$result=mysqli_query($conn,$sql_search_ship_charge);
 		if(mysqli_num_rows($result)!=0){
 			$row=mysqli_fetch_array($result);
 			array_push($shipInfor,$row['ShipmentCharge']);
 			array_push ($shipInfor,$row['ShipmentId']);
+			$_SESSION['shipInfor']=$shipInfor;	
+			$_SESSION['totalCharge']=0;
+			for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+				$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
+			}
+			$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['shipInfor'][2];
+			echo "NOW the total charge is :   ";		
+			echo $_SESSION['totalCharge'];	
 		}
-		//array_push($shipInfor,$_POST['shipmentcharge']); 
-		$_SESSION['shipInfor']=$shipInfor;
-		//echo $_SESSION['shipInfor'][2];
+		else {
+			echo "No shipping method was found ! Use the default?";
+			$shipInfor=array();
+			array_push($shipInfor,'next-day'); 
+			array_push($shipInfor,'USPS'); 
+			// and search for the ID and charge; 
+			$sql_search_ship_charge= "SELECT * FROM shipment WHERE ShipmentDetail = ". "'".$_POST['shipmentdetail']."'"." AND ShipmentType = "."'". $_POST['shipmenttype']."'". ";";
+			$result=mysqli_query($conn,$sql_search_ship_charge);
+			$row=mysqli_fetch_array($result);			
+			array_push($shipInfor,$row['ShipmentCharge']);
+			array_push ($shipInfor,$row['ShipmentId']);
+			$_SESSION['shipInfor']=$shipInfor;	
+			header( "refresh:3;url=checkoutOrKeepShopping.php" );
+			exit();
+			
+		}
+		
 	}
 	if (isset($_POST['update_payment'])){
 		$paymentInfor=array();
@@ -256,6 +283,8 @@ else if (isset($_POST['checkout'])){
 			echo "</tr>";
 			echo "</form>"; 
 		}
+		echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
+		echo "<table border=1> <tr><th>".$_SESSION['totalCharge']."</th></tr>";	
 	}
 ?>
 

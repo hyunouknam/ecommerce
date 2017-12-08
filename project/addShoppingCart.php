@@ -37,6 +37,13 @@
 		$myData=$_SESSION['searchResults']; // array in search results	
 	}	
 	$myselection=$_SESSION['productsAdded']; // stuff that's selected
+				//0	$row['SellerId'],
+				//1	$row['ItemId'],
+				//2	$row['ItemName'],
+				//3	$row['Quantity'],
+				//4	$row['Price'] 4*5
+				//5 shopingQuantity
+					
 	if (isset($_POST['checkbox'])){
 		$checkbox=$_POST['checkbox'];
 		for($i=0;$i<count($checkbox);$i++){
@@ -49,25 +56,30 @@
 				}
 			}
 			if ($check_index==-1){	// if item is not in list, new item is selected 
-			  array_push($myData[$check1],1); 
+			  array_push($myData[$check1],1);  // quantity
 			  array_push($myselection, $myData[$check1]);
-			}
+			}			
 		}	
 		$_SESSION['productsAdded']=$myselection;
-	echo "<table border=1> <tr>     <th>                  SellerId               </th><th>ItemId</th> <th>ItemName</th>                    <th>Item Price</th>    <th>Quantity</th>  </tr>";	
+	echo "<table border=1> <tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Item Price</th><th>Charge/Item</th><th>Quantity</th> </tr>";	
+	$totalChargeForItems=0;
 	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+		$totalChargeForItems=$totalChargeForItems+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
 		echo "<form action='addShoppingCart.php' method='POST'>";
 		echo "<tr>";
 		echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
 		echo "<td>" .$_SESSION['productsAdded'][$i][1]. " </td>"; 
 		echo "<td>" .$_SESSION['productsAdded'][$i][2]. " </td>";
 		echo "<td>" .$_SESSION['productsAdded'][$i][4]. " </td>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=text name= Quantity value= ". $_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ".$_SESSION['productsAdded'][$i][1]. " </td>";
 		echo "<td>" ."<input type=submit name= update_shoppingcart value= update_quantity ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
-		}
+	}
+	echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
+	echo "<table border=1> <tr><th>".$totalChargeForItems."</th></tr>";	
 	}
 	if (isset($_POST['update_shoppingcart'])){
 		$myData=$_SESSION['searchResults'];
@@ -98,19 +110,25 @@
 
 <?php	
 	if (isset($_POST['ShoppingCart'])){
+		echo "<table border=1> <tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Item Price</th><th>Charge/Item</th><th>Quantity</th> </tr>";
+		$totalChargeForItems=0;
 		for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+		$totalChargeForItems=$totalChargeForItems+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
 		echo "<form action='addShoppingCart.php' method='POST'>";
 		echo "<tr>";
 		echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
 		echo "<td>" .$_SESSION['productsAdded'][$i][1]. " </td>"; 
 		echo "<td>" .$_SESSION['productsAdded'][$i][2]. " </td>";
 		echo "<td>" .$_SESSION['productsAdded'][$i][4]. " </td>";
+		echo "<td>" .$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=text name= Quantity value= ". $_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ".$_SESSION['productsAdded'][$i][1]. " </td>";
 		echo "<td>" ."<input type=submit name= update_shoppingcart value= update_quantity ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
 		}
+		echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
+		echo "<table border=1> <tr><th>".$totalChargeForItems."</th></tr>";	
 	}
 	else if(isset($_POST['submit_logout'])){
 		echo "you logout! Now redirecting you to the homepage!";

@@ -96,6 +96,8 @@
 		echo "<td>".$_SESSION['paymentInfor'][2] ."</td>";
 		echo "</tr>";
 		echo "</form>";
+		echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
+		echo "<table border=1> <tr><th>".$_SESSION['totalCharge']."</th></tr>";
 ?>
 
 <?php	
