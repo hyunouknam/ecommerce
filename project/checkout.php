@@ -1,4 +1,5 @@
 <?php
+	// need to check if the ssession variables has value greater than 0
 	include_once 'header.php';	
 	session_start();
 	$CustomerId=$_SESSION['isCustomerLogin']['Id'];

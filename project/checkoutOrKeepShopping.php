@@ -12,7 +12,12 @@
 ?>
 <div class ="checkout">
 	<form method='POST' action= 'checkout.php'>
-	<input type='submit' name= 'ContinueCheckout' value='ContinueCheckout' >	
+	<input type='submit' name= 'ContinueCheckout' value='ContinueCheckout' >
+	</form>
+</div>
+<div class ="checkout">
+	<form method='POST' >
+	<input type='submit' name= 'submit_logout' value='Logout' >
 	</form>
 </div>
 <div class ="viewInfor">
@@ -28,6 +33,16 @@ if (isset($_POST['keepsearch'])){
 	echo "you want keep searching??";
 	header( "refresh:2;url=searchresults.php" );
 	exit();
+}
+else if(isset($_POST['submit_logout'])){
+		echo "you logout! Now redirecting you to the homepage!";
+		unset($_SESSION['isCustomerLogin']['duration']);
+		unset($_SESSION['isCustomerLogin']['start']);
+		unset($_SESSION['isCustomerLogin']['logintype']);
+		unset($_SESSION['isCustomerLogin']['Id']);
+		unset($_SESSION['isCustomerLogin']);
+		session_destroy();
+		header( "refresh:3;url=homepage.php" );
 }
 else if (isset($_POST['checkout'])){
 	// items in shopping cart 
@@ -45,6 +60,7 @@ else if (isset($_POST['checkout'])){
 		echo "</tr>";
 		echo "</form>"; 
 	}
+	
 	// Customer Address
 		echo "<table border=1> <tr><th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);

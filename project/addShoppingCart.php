@@ -84,6 +84,7 @@
 <div class ="seewhat's in shopping cart">
 	<form method='POST' action= 'addShoppingCart.php'>
 	<input type='submit' name= 'ShoppingCart' value='ShoppingCart' >
+	<input type='submit' name= 'submit_logout' value='Logout' >
 	</form>
 </div>
 
@@ -110,6 +111,16 @@
 		echo "</tr>";
 		echo "</form>"; 
 		}
+	}
+	else if(isset($_POST['submit_logout'])){
+		echo "you logout! Now redirecting you to the homepage!";
+		unset($_SESSION['isCustomerLogin']['duration']);
+		unset($_SESSION['isCustomerLogin']['start']);
+		unset($_SESSION['isCustomerLogin']['logintype']);
+		unset($_SESSION['isCustomerLogin']['Id']);
+		unset($_SESSION['isCustomerLogin']);
+		session_destroy();
+		header( "refresh:3;url=homepage.php" );
 	}
 	include_once 'footer.php';
 ?>
