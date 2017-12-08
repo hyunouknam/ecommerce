@@ -5,7 +5,9 @@
 	$dbServername="localhost";
 	$dbUsername="root";
 	$dbPassword="12345";
-	$dbName="ecommence"; 
+	$dbName="ecommence";
+	
+	
 	
 ?>
 <div class ="checkout">
@@ -16,6 +18,7 @@
 <div class ="viewInfor">
 	<form method='POST' action= 'checkoutOrKeepShopping.php'>
 	<input type='submit' name= 'ViewAddressInfo' value='ViewAddressInfo' >
+	<input type='submit' name= 'ViewShipInfo' value='ViewShipInfo' >
 	<input type='submit' name= 'ViewPaymentInfo' value='ViewPaymentInfo' >	
 	<input type='submit' name= 'ViewItemInShoppingCart' value='ViewItemInShoppingCart' >
 	</form>
@@ -27,6 +30,7 @@ if (isset($_POST['keepsearch'])){
 	exit();
 }
 else if (isset($_POST['checkout'])){
+	// items in shopping cart 
 	$itemsInShoppingCart=$_SESSION['productsAdded'];
 	echo "<p1> Items in shopping cart </p1>";
 	echo "<table border=1><tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Price</th><th>Quantity</th></tr>";	
@@ -47,23 +51,41 @@ else if (isset($_POST['checkout'])){
 		$sql= "SELECT * FROM customer WHERE CustomerId = ".$CustomerId. ";";
 		$result=mysqli_query($conn,$sql);
 		if(mysqli_num_rows($result)!=0){
-		$row=mysqli_fetch_array($result);	
+		$row=mysqli_fetch_array($result);
+		$_SESSION['addressInfor']=array($row['FirstName'],$row['LastName'],$row['Address'],$row['Email'],$row['PhoneNumber']);
 		echo "<h1> Use this address? (Customer's address)</h1>";
 		echo "<form  method='POST'>";
 		echo "<tr>";
-		echo "<td>" ."<input type=text name= FirstName value= ". $row['FirstName']. " </td>"; 
-		echo "<td>" ."<input type=text name= LastName value= ". $row['LastName']. " </td>"; 
-		echo "<td>" ."<input type=text name= Address value= ". $row['Address']. " </td>";
-		echo "<td>" ."<input type=text name= Email value= ". $row['Email']. " </td>";
-		echo "<td>" ."<input type=text name= PhoneNumber value= ". $row['PhoneNumber']. " </td>";
-		echo "<td>" ."<input type=submit name= update_shippingAddress value= ChangeToThisAddress ". " </td>";
+		echo "<td>" ."<input type=text name= FirstName value= ". $row['FirstName']. "></td>"; 
+		echo "<td>" ."<input type=text name= LastName value= ". $row['LastName']. " ></td>"; 
+		echo "<td>" ."<input type=text name= Address value= ". $row['Address']. " ></td>";
+		echo "<td>" ."<input type=text name= Email value= ". $row['Email']. " ></td>";
+		echo "<td>" ."<input type=text name= PhoneNumber value= ". $row['PhoneNumber']. "> </td>";
+		echo "<td>" ."<input type=submit name= update_shippingAddress value= ChangeToThisAddress ". "></td>";
 		echo "</tr>";
 		echo "</form>"; 
 	}	
+	// shipment information
+		echo "<table border=1> <tr><th> shipmentDetail </th> <th> ShipmentType </th> <th> ShipCharge </th></tr>";	
+		echo "<h1> shipment information</h1>";
+		echo "shipdetail: next-day/regular";
+		echo "shiptype: USPS/UPS";		
+		echo "<form  method='POST'>";
+		echo "<tr>";
+		$_SESSION['shipInfor']=array('next-day','USPS',10.00);
+		echo "<td>" ."<input type=text name= shipmentdetail value= ". "next-day". " ></td>"; 
+		echo "<td>" ."<input type=text name= shipmenttype value= "."USPS". " ></td>"; 
+		echo "<td>" ."shipCharge ". "10.00 ". "</td>";
+		echo "<td>" ."<input type=submit name= update_shippingInfor value= usethisshipmenttype ". " </td>";
+		echo "</tr>";
+		echo "</form>";
+	
+	// payment information
 	echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
 	echo "<h2> You payment information</h2>";
-		echo "<form action='checkoutOrKeepShopping.php' method='POST'>";
+		echo "<form  method='POST'>";
 		echo "<tr>";
+		$_SESSION['paymentInfor']=array();
 		echo "<td>" ."<input type=text name= CardType value= "." ". " ></td>"; 
 		echo "<td>" ."<input type=text name= ExpirationDate value= "." ". " ></td>"; 
 		echo "<td>" ."<input type=text name= CardNumber value= "." ". "> </td>";
@@ -80,8 +102,27 @@ else if (isset($_POST['checkout'])){
 		array_push($shippingAddress,$_POST['PhoneNumber']); 
 		$_SESSION['addressInfor']=$shippingAddress;
 	}
+	if (isset($_POST['update_shippingInfor'])){
+		$shipInfor=array();
+		array_push($shipInfor,$_POST['shipmentdetail']); 
+		array_push($shipInfor,$_POST['shipmenttype']); 
+		$dbServername="localhost";
+		$dbUsername="root";
+		$dbPassword="12345";
+		$dbName="ecommence"; 
+		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
+		$sql_search_ship_charge= "SELECT * FROM shipment_test WHERE ShipmentDetail = ". "'".$_POST['shipmentdetail']."'"." AND ShipmentType = "."'". $_POST['shipmenttype']."'". ";";
+		//echo $sql_search_ship_charge;
+		$result=mysqli_query($conn,$sql_search_ship_charge);
+		if(mysqli_num_rows($result)!=0){
+			$row=mysqli_fetch_array($result);
+			array_push($shipInfor,$row['ShipmentCharge']);	
+		}
+		//array_push($shipInfor,$_POST['shipmentcharge']); 
+		$_SESSION['shipInfor']=$shipInfor;
+		//echo $_SESSION['shipInfor'][2];
+	}
 	if (isset($_POST['update_payment'])){
-		echo "You clicked???";
 		$paymentInfor=array();
 		array_push($paymentInfor,$_POST['CardType']); 
 		array_push($paymentInfor,$_POST['ExpirationDate']); 
@@ -98,9 +139,9 @@ else if (isset($_POST['checkout'])){
 			echo "No address information available";
 			echo "<h1> No address infor is available you can add it here</h1>";
 			echo "<table border=1> <tr><th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
-			echo "<form action='checkoutOrKeepShopping.php' method='POST'>";
+			echo "<form  method='POST'>";
 			echo "<tr>";
-			echo "<td>" ."<input type=text name= FirstName value= "." " . "> </td>"; 
+			echo "<td>" ."<input type=text name= FirstName value= "." " ."</td>"; 
 			echo "<td>" ."<input type=text name= LastName value= "." ". " ></td>"; 
 			echo "<td>" ."<input type=text name= Address value= "." ". " ></td>";
 			echo "<td>" ."<input type=text name= Email value= ". " ". " ></td>";
@@ -112,7 +153,7 @@ else if (isset($_POST['checkout'])){
 		else {
 			echo "<h1> Use this address? (Customer's address)</h1>";
 			echo "<table border=1> <tr><th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
-			echo "<form action='checkoutOrKeepShopping.php' method='POST'>";
+			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= FirstName value= ".$_SESSION['addressInfor'][0] . " </td>"; 
 			echo "<td>" ."<input type=text name= LastName value= ". $_SESSION['addressInfor'][1]. " </td>"; 
@@ -129,7 +170,7 @@ else if (isset($_POST['checkout'])){
 			echo "No PaymentInfor available! You can update here!";
 			echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
 			echo "<h2> You payment information</h2>";
-			echo "<form action='checkoutOrKeepShopping.php' method='POST'>";
+			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= CardType value= "."". " ></td>"; 
 			echo "<td>" ."<input type=text name= ExpirationDate value= "."". " ></td>"; 
@@ -141,12 +182,44 @@ else if (isset($_POST['checkout'])){
 		else{
 			echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
 			echo "<h2> You payment information</h2>";
-			echo "<form action='checkoutOrKeepShopping.php' method='POST'>";
+			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= CardType value= ".$_SESSION['paymentInfor'][0]. " ></td>"; 
 			echo "<td>" ."<input type=text name= ExpirationDate value= ".$_SESSION['paymentInfor'][1]. " ></td>"; 
 			echo "<td>" ."<input type=text name= CardNumber value= ".$_SESSION['paymentInfor'][2]. "> </td>";
 			echo "<td>" ."<input type=submit name= update_payment value= useThisPayment ". " </td>";
+			echo "</tr>";
+			echo "</form>"; 
+		}		
+	}
+	// view ship infor
+	if (isset($_POST['ViewShipInfo'])){
+		if (count($_SESSION['shipInfor'])==0){
+			echo "No ShipInfor available! You can update here!";
+			echo "shipdetail: next-day/regular";
+			echo "shiptype: USPS/UPS";	
+			echo "<table border=1> <tr><th> shipmentDetail </th> <th> shipmenttype </th> <th> shipmentcharge </th></tr>";	
+			echo "<h2> You shipment information</h2>";
+			echo "<form  method='POST'>";
+			echo "<tr>";
+			echo "<td>" ."<input type=text name= shipmentdetail value= "."". " ></td>"; 
+			echo "<td>" ."<input type=text name= shipmenttype value= "."". " ></td>"; 
+			echo "<td>" ."value= "." ". "> </td>";
+			echo "<td>" ."<input type=submit name= update_shippingInfor value= usethisshipmenttype ". " </td>";
+			echo "</tr>";
+			echo "</form>"; 
+		}
+		else{
+			echo "shipdetail: next-day/regular";
+			echo "shiptype: USPS/UPS";	
+			echo "<table border=1> <tr><th> shipmentDetail </th> <th> shipmenttype </th> <th> shipmentcharge </th></tr>";	
+			echo "<h2> You payment information</h2>";
+			echo "<form  method='POST'>";
+			echo "<tr>";
+			echo "<td>" ."<input type=text name= shipmentdetail value= ".$_SESSION['shipInfor'][0]. " ></td>"; 
+			echo "<td>" ."<input type=text name= shipmenttype value= ".$_SESSION['shipInfor'][1]. " ></td>"; 
+			echo "<td>" ."value= ".$_SESSION['shipInfor'][2]. "</td>";
+			echo "<td>" ."<input type=submit name= update_shippingInfor value= usethisshipmenttype ". " </td>";
 			echo "</tr>";
 			echo "</form>"; 
 		}		
