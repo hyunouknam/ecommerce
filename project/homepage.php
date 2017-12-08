@@ -1,5 +1,19 @@
 <?php
-	include_once 'header.php'; 
+	include_once 'header.php';
+
+	if (isset($_SESSION['isCustomerLogin'])){
+    	header("Location: customerLoggedin.php");
+    	exit;
+    } 
+    else if (isset($_SESSION['isSellerLogin'])){
+    	header("Location: sellerLoggedin.php");
+    	exit;
+    }
+    else if (isset($_SESSION['isEmployeeLogin'])){
+    	header("Location: employeeLoggedin.php");
+    	exit;
+    }
+
 	function get($name){
 		return isset($_REQUEST[$name])? $_REQUEST[$name]:'';
 	}
@@ -12,7 +26,7 @@
 			$options .= '<option value="'. ($i+1).'">'.$logintype[$i]. '</option>';				
 		}	
 		return $options;
-	}	
+	}
 ?>
 
 <section class="main-container"> 

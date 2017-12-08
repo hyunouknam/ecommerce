@@ -1,6 +1,5 @@
 <?php
 	include_once'header.php';
-	session_start();
 	$signuptype = $_SESSION['selected_signup_type'];
 	echo "<h1 class='h1class'> This is" ." $signuptype ". "signup </h1>";	
 ?>

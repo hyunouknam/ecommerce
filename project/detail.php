@@ -1,6 +1,5 @@
 <?php
 	include_once"header.php";
-	session_start();
 	$dbServername="localhost";
 	$dbUsername="root";
 	$dbPassword="12345";
@@ -89,10 +88,9 @@
 			$date = date('Y-m-d');
 			$sql="INSERT INTO  $tableName (ReviewId, ItemId, Rating, DetailedReview, DatePosted) VALUES ($zero, $itemid, $rating, '$detailedreview', '$date');";
 			mysqli_query($conn,$sql);
+			//unset($_POST['submit']);
 			header("Refresh:0");
-
-			unset($_POST['submit']);
+			exit;
 	}
 
-	// HAVE TO ADD DATE POSTED!!!!!!!!!!!!!!
 ?>

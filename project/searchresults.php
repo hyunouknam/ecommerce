@@ -1,6 +1,5 @@
 <?php
 	include_once"header.php";
-	session_start();
 	$dbServername="localhost";
 	$dbUsername="root";
 	$dbPassword="12345";
