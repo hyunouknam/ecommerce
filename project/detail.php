@@ -81,7 +81,11 @@
 					echo "<br>".$row2['FirstName']. ' ' .$row2['LastName']. "</br>";
 
 					if($cid == $customerid){
-						//echo '<input type="delete" name="deleteReview" value="'.$row['ReviewId'].'" /></td>"';
+						$reviewid = $row['ReviewId'];
+						//echo '<form method="POST" action= "redirect.php?reviewid=">';
+						echo '<form method="POST" action= "redirect.php?reviewid=' .$reviewid. '">';
+						echo '<input type="submit" name= "DeleteReview" value="delete" >';
+						echo "</form>";
 					}
 				}
 				///
