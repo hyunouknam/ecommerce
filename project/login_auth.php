@@ -1,7 +1,9 @@
 <?php
 	include_once 'header.php'; 
 /*session will stay alive for 10 seconds if user remains idle */
-	session_start();
+	if(!isset($_SESSION)){
+    	session_start();
+	}
 	$duration=600; /*600 seconds */
 	$dbServername="localhost";
 	$dbUsername="root";

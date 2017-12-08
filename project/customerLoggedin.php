@@ -1,6 +1,5 @@
 <?php
 	include_once 'header.php'; 
-	session_start();
 	if (isset($_SESSION['isCustomerLogin'])){
 		$duration=$_SESSION['isCustomerLogin']['duration'];
 		$start =$_SESSION['isCustomerLogin']['start'];

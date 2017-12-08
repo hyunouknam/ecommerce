@@ -1,6 +1,5 @@
 <?php
 	include_once 'header.php'; 
-	session_start();
 	if (!isset($_SESSION['isSellerLogin'])){
 		echo "you are not login, now directing you to main page!";
 		header( "refresh:3;url=homepage.php" );
