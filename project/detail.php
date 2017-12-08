@@ -8,6 +8,7 @@
 
 <?php
 	$itemid = $_GET['itemid'];
+	$_SESSION['itemid'] = $itemid;
 	$customerid = $_SESSION['isCustomerLogin']['Id'];
 
 		// show item information
@@ -79,7 +80,9 @@
 
 					echo "<br>".$row2['FirstName']. ' ' .$row2['LastName']. "</br>";
 
-					
+					if($cid == $customerid){
+						//echo '<input type="delete" name="deleteReview" value="'.$row['ReviewId'].'" /></td>"';
+					}
 				}
 				///
 
@@ -130,7 +133,8 @@
 			$sql="INSERT INTO  $tableName (ReviewId, ItemId, Rating, DetailedReview, DatePosted, CustomerId) VALUES ($zero, $itemid, $rating, '$detailedreview', '$date', '$customerid');";
 			mysqli_query($conn,$sql);
 			//unset($_POST['submit']);
-			header("Refresh:0");
+			//header("Refresh:0");
+			header('Location: redirect.php');
 			exit;
 	}
 
