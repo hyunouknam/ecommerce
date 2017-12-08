@@ -6,7 +6,23 @@
 	$addressInfor=$_SESSION['addressInfor'];
 	$paymentInfor=$_SESSION['paymentInfor'];
 	$shipmentInfor=$_SESSION['shipInfor'];
-	$itemsInShoppingCart=$_SESSION['productsAdded'];	
+	$itemsInShoppingCart=$_SESSION['productsAdded'];
+	if (count($addressInfor)<5){
+		echo "customer address infor not complete!";
+		header( "refresh:3;url=checkoutOrKeepShopping.php" );
+		exit();
+	}
+	else if (count($paymentInfor)<3){
+		echo "payment infor not complete!";
+		header( "refresh:3;url=checkoutOrKeepShopping.php" );
+		exit();
+	}
+	else if (count($shipmentInfor)<3){
+		echo "shipment infor not complete!";
+		header( "refresh:3;url=checkoutOrKeepShopping.php" );
+		exit();		
+	}
+	
 ?>
 
 <div class ="checkout">
@@ -14,7 +30,26 @@
 	<input type='submit' name= 'PlaceOrder' value='PlaceOrder' >
 	</form>
 </div>
+<div class ="checkout">
+	<form method='POST' >
+	<input type='submit' name= 'submit_logout' value='Logout' >
+	</form>
+</div>
 <?php
+	if(isset($_POST['submit_logout'])){
+		echo "you logout! Now redirecting you to the homepage!";
+		unset($_SESSION['isCustomerLogin']['duration']);
+		unset($_SESSION['isCustomerLogin']['start']);
+		unset($_SESSION['isCustomerLogin']['logintype']);
+		unset($_SESSION['isCustomerLogin']['Id']);
+		unset($_SESSION['isCustomerLogin']);
+		session_destroy();
+		header( "refresh:3;url=homepage.php" );
+}
+
+
+
+
 	echo "<p1> Items in shopping cart </p1>";
 	echo "<table border=1><tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Price</th><th>Quantity</th></tr>";	
 	for($i=0;$i<count($_SESSION['productsAdded']);$i++){

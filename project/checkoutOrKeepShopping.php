@@ -127,12 +127,13 @@ else if (isset($_POST['checkout'])){
 		$dbPassword="12345";
 		$dbName="ecommence"; 
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
-		$sql_search_ship_charge= "SELECT * FROM shipment_test WHERE ShipmentDetail = ". "'".$_POST['shipmentdetail']."'"." AND ShipmentType = "."'". $_POST['shipmenttype']."'". ";";
+		$sql_search_ship_charge= "SELECT * FROM shipment WHERE ShipmentDetail = ". "'".$_POST['shipmentdetail']."'"." AND ShipmentType = "."'". $_POST['shipmenttype']."'". ";";
 		//echo $sql_search_ship_charge;
 		$result=mysqli_query($conn,$sql_search_ship_charge);
 		if(mysqli_num_rows($result)!=0){
 			$row=mysqli_fetch_array($result);
-			array_push($shipInfor,$row['ShipmentCharge']);	
+			array_push($shipInfor,$row['ShipmentCharge']);
+			array_push ($shipInfor,$row['ShipmentId']);
 		}
 		//array_push($shipInfor,$_POST['shipmentcharge']); 
 		$_SESSION['shipInfor']=$shipInfor;
