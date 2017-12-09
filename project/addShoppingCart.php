@@ -128,7 +128,8 @@
 		echo "</tr>";
 		echo "</form>"; 
 		}
-		echo "<table border=1> <tr><th>TOTAL CHARGE IS ".$totalChargeForItems."</th></tr>";	
+		echo "<table border=1> <tr><th>TOTAL CHARGE IS ".$totalChargeForItems."</th></tr>";
+		//$_SESSION['totalCharge'] = $totalChargeForItems;
 		//echo "<table border=1> <tr><th>".$totalChargeForItems."</th></tr>";	
 	}
 	else if(isset($_POST['submit_logout'])){
