@@ -52,7 +52,7 @@
 	}
 	// UPDATE customerorders TABLE
 	$sql_customerorders = "INSERT INTO customerorders (CustomerId, PaymentId, ShipmentId, TotalCharge ) VALUES (". $CustomerId.",".$paymentId.",".$shipmentInfor[3].",".$_SESSION['totalCharge'].");";
-	//echo $sql_customerorders;
+	echo $sql_customerorders;
 	mysqli_query($conn,$sql_customerorders);
 	// insert orderitems
 	// find the orderId you just added, 
