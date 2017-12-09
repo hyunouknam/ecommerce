@@ -80,7 +80,8 @@
 			mysqli_query($conn,$sql);
 	}
 	 if (isset($_POST['update'])){
-		$sql_update="UPDATE inventory SET ItemName = "."'".$_POST['ItemName'] ."',"." Price= ". $_POST['ItemPrice'] .","." Quantity = ". $_POST['Quantity'].","." SellerId = ".$_POST['SellerId']. ","." ItemId = ".$_POST['ItemId'] ." WHERE ItemId = ".$_POST['hidden_ItemId'] .";";
+
+		$sql_update="UPDATE inventory SET ItemName = "."'".$_POST['ItemName'] ."',"." Price= ". $_POST['ItemPrice'] .","." Quantity = ". $_POST['Quantity']." WHERE ItemId = ".$_POST['hidden_ItemId'] .";";
 		echo $sql_update;
 		$dbServername="localhost";
 		$dbUsername="root";
@@ -121,12 +122,12 @@
 		echo "<form action='employeeLoggedin.php' method='POST'>";
 		echo "<tr>";
 		echo "<td>" . $row['SellerId']. " </td>";
-		echo "<td>" ."<input type=text name= ItemId value= '". $row['ItemId']. "' </td>";
-		echo "<td>" ."<input type=text name= ItemName value= '". $row['ItemName']. "' </td>"; 
-		echo "<td>" ."<input type=text name= ItemPrice value= '". $row['Price']. "' </td>"; 
-		echo "<td>" ."<input type=text name= Quantity value= '". $row['Quantity']. "' </td>";
-		echo "<td>" ."<input type=hidden name= hidden_SellerId value= '". $row['SellerId']. "' </td>";
-		echo "<td>" ."<input type=hidden name= hidden_ItemId value= '". $row['ItemId']. "' </td>";
+		echo "<td>" . $row['ItemId']. " </td>";
+		echo "<td>" ."<input type=text name= ItemName value= ". $row['ItemName']. " </td>"; 
+		echo "<td>" ."<input type=text name= ItemPrice value= ". $row['Price']. " </td>"; 
+		echo "<td>" ."<input type=text name= Quantity value= ". $row['Quantity']. " </td>";
+		echo "<td>" ."<input type=hidden name= hidden_SellerId value= ". $row['SellerId']. " </td>";
+		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ". $row['ItemId']. " </td>";
 		echo "<td>" ."<input type=submit name= update value= update ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 

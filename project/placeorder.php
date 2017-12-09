@@ -52,7 +52,7 @@
 	}
 	// UPDATE customerorders TABLE
 	$sql_customerorders = "INSERT INTO customerorders (CustomerId, PaymentId, ShipmentId, TotalCharge ) VALUES (". $CustomerId.",".$paymentId.",".$shipmentInfor[3].",".$_SESSION['totalCharge'].");";
-	echo $sql_customerorders;
+	//echo $sql_customerorders;
 	mysqli_query($conn,$sql_customerorders);
 	// insert orderitems
 	// find the orderId you just added, 
@@ -77,7 +77,8 @@
 		$totalQuantity=$_SESSION['productsAdded'][$i][3];
 		$Price=$_SESSION['productsAdded'][$i][4];
 		$quantityInOrder= $_SESSION['productsAdded'][$i][5];
-		$sql_insert = "INSERT INTO orderitems (OrderId, ItemId, SellerId, Quantity ) VALUES ( ".$OrderId.", ".$ItemId.", ".$SellerId.", ".$quantityInOrder.");";
+		$sql_insert = "INSERT INTO orderitems (OrderId, ItemId, ItemName,SellerId, ItemPrice, Quantity) VALUES ( ".$OrderId.", ".$ItemId.", '".$ItemName."', ".$SellerId.", ".$Price." , ".$quantityInOrder.");";
+		echo $sql_insert;
 		mysqli_query($conn,$sql_insert);
 		}	
 		echo "you are all SET !!!!!";

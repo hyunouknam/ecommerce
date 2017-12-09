@@ -94,7 +94,11 @@ else if (isset($_POST['checkout'])){
 		echo "<td>" ."<input type=text name= shipmentdetail value= ". "next-day". " ></td>"; 
 		echo "<td>" ."<input type=text name= shipmenttype value= "."USPS". " ></td>"; 
 		echo "<td>" . "10.00 ". "</td>";
+<<<<<<< HEAD
 		echo "<td>" ."<input type=submit name= update_shippingInfor value= 'Use this shipment type' ". " </td>";
+=======
+		echo "<td>" ."<input type=submit name= update_shippingInfor value= usethisshipmenttype ". " </td>";
+>>>>>>> 84a12faaedfadebbe97e06cf4b1b9edfd4536878
 		echo "</tr>";
 		echo "</form>";
 	
@@ -153,12 +157,16 @@ else if (isset($_POST['checkout'])){
 			array_push($shipInfor,'next-day'); 
 			array_push($shipInfor,'USPS'); 
 			// and search for the ID and charge; 
-			$sql_search_ship_charge= "SELECT * FROM shipment WHERE ShipmentDetail = ". "'".$_POST['shipmentdetail']."'"." AND ShipmentType = "."'". $_POST['shipmenttype']."'". ";";
+			$sql_search_ship_charge= "SELECT * FROM shipment WHERE ShipmentDetail = ". "'"."next-day"."'"." AND ShipmentType = "."'".'USPS'."'". ";";
 			$result=mysqli_query($conn,$sql_search_ship_charge);
 			$row=mysqli_fetch_array($result);			
 			array_push($shipInfor,$row['ShipmentCharge']);
 			array_push ($shipInfor,$row['ShipmentId']);
 			$_SESSION['shipInfor']=$shipInfor;	
+			echo $_SESSION['shipInfor'][0];
+			echo $_SESSION['shipInfor'][1];
+			echo $_SESSION['shipInfor'][2];
+			echo $_SESSION['shipInfor'][3];
 			header( "refresh:3;url=checkoutOrKeepShopping.php" );
 			exit();
 			
@@ -261,7 +269,7 @@ else if (isset($_POST['checkout'])){
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= shipmentdetail value= ".$_SESSION['shipInfor'][0]. " ></td>"; 
 			echo "<td>" ."<input type=text name= shipmenttype value= ".$_SESSION['shipInfor'][1]. " ></td>"; 
-			echo "<td>" ."value= ".$_SESSION['shipInfor'][2]. "</td>";
+			echo "<td> ".$_SESSION['shipInfor'][2]. "</td>";
 			echo "<td>" ."<input type=submit name= update_shippingInfor value= usethisshipmenttype ". " </td>";
 			echo "</tr>";
 			echo "</form>"; 
