@@ -48,7 +48,7 @@ else if (isset($_POST['checkout'])){
 	// items in shopping cart 
 	$itemsInShoppingCart=$_SESSION['productsAdded'];
 	echo "<p1> Items in shopping cart </p1>";
-	echo "<table border=1><tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Price</th><th>Quantity</th></tr>";	
+	echo "<table border=1><tr><th>SellerId &emsp;&emsp;&emsp;</th><th>ItemId &emsp;&emsp;&emsp;</th><th>ItemName &emsp;&emsp;&emsp;</th><th>Price &emsp;&emsp;&emsp;</th><th>Quantity &emsp;&emsp;&emsp;</th></tr>";	
 	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
 		//$_SESSION['totalCharge']=$totalChargeForItems+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
 		echo "<form method='POST'>";
@@ -144,7 +144,6 @@ else if (isset($_POST['checkout'])){
 			array_push($shipInfor,$row['ShipmentCharge']);
 			array_push ($shipInfor,$row['ShipmentId']);
 			$_SESSION['shipInfor']=$shipInfor;	
-			$_SESSION['totalCharge']=0;
 			for($i=0;$i<count($_SESSION['productsAdded']);$i++){
 				$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
 			}
