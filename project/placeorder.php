@@ -1,6 +1,5 @@
 <?php
 	include_once'header.php';
-	session_start();
 	$CustomerId=$_SESSION['isCustomerLogin']['Id'];
 	$addressInfor=$_SESSION['addressInfor'];
 	$paymentInfor=$_SESSION['paymentInfor'];
@@ -30,8 +29,7 @@
 				mysqli_query($conn,$sql_update);	
 			}
 		}
-		
-		
+
 	// insert payment;
 	// first search if it exist alreay!
 	$sql_payment_exits="SELECT * FROM payment WHERE CustomerId = ". $CustomerId. " AND CardType = '".$paymentInfor[0]."' AND ExpirationDate = ". "'".$paymentInfor[1]."' AND CardNumber = ". "'".$paymentInfor[2]."';";

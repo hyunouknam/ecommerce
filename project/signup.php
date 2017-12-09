@@ -10,23 +10,23 @@
 		<?php
 			if(strcmp($signuptype,"Customer")==0 ||strcmp($signuptype,"Seller")==0 ){
 				echo "<input type='text' name='uid' placeholder='customer 5XX seller 3XX' required>";
-				echo "<input type='text' name='password' placeholder='6 characters' required>";
-				echo "<input type='text' name='firstname' placeholder='first name in char' required>";
-				echo "<input type='text' name='lastname' placeholder='last name in char' required>";
-				echo "<input type='text' name ='address' placeholder='address in char' required>";
+				echo "<input type='text' name='password' placeholder='at most 6 characters' required>";
+				echo "<input type='text' name='firstname' placeholder='first name' required>";
+				echo "<input type='text' name='lastname' placeholder='last name' required>";
+				echo "<input type='text' name ='address' placeholder='address' required>";
 				echo "<input type='text' name='email' placeholder='email address with @' required>";
-				echo "<input type='text' name='phone' placeholder='phone in int' required>";
+				echo "<input type='text' name='phone' placeholder='phone number(without -)' required>";
 				echo "<input type='submit' value='submit' name='submit' >";
 			}
 			else if (strcmp($signuptype,"Employee")==0){
 				echo "<input type='text' name='uid' placeholder='int as 1XX' required>";
-				echo "<input type='text' name='password' placeholder='6 characters' required>";
-				echo "<input type='text' name='firstname' placeholder='first name in char' required>";
-				echo "<input type='text' name='lastname' placeholder='last name in char' required>";
-				echo "<input type='text' name ='address' placeholder='address in char' required>";
+				echo "<input type='text' name='password' placeholder='at most 6 characters' required>";
+				echo "<input type='text' name='firstname' placeholder='first name' required>";
+				echo "<input type='text' name='lastname' placeholder='last name' required>";
+				echo "<input type='text' name ='address' placeholder='address' required>";
 				echo "<input type='text' name='email' placeholder='email address with @' required>";
-				echo "<input type='text' name='phone' placeholder='phone in int' required>";
-				echo "<input type='text' name='role' placeholder='role char' required>";
+				echo "<input type='text' name='phone' placeholder='phone number(without -)' required>";
+				echo "<input type='text' name='role' placeholder='role' required>";
 				echo "<input type='submit' value='submit' name='submit' >";
 			}
 		?>

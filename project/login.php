@@ -6,7 +6,7 @@
 	<form class ="signin-form"  method ="POST" action='login_auth.php'>
 		<div class="container">
 		<label><b>ID</b></label>
-		<input type="text" placeholder="Enter ID in int" name="uid" required>
+		<input type="text" placeholder="Enter ID" name="uid" required>
 		<input type="text" placeholder="Enter password" name="password" required>
 		<input type="submit" value="submit" name="submit" >
 		</div>

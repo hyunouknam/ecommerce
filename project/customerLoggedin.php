@@ -90,7 +90,7 @@
 		}
 		
 		else if (mysqli_num_rows($result)==0){
-			echo "there is no order history in you account!";
+			echo "There is no order history in your account!";
 		}
 	}	
 	
@@ -115,13 +115,13 @@
 		vertical-align:middle;
 	} 
 	</style>
-	<div class="customerAccount">Now you are Login as customer, here's what you can do:
+	<div class="customerAccount">Now you are logged in as customer, here's what you can do:
 	<section class="main-container"> 
 	<div class="main-wrapper">
 		<form class="sellerfunction"  method="POST" >
-			<input type='submit' value='update customer information' name='submit_updateCustomer' >
-			<input type='submit' value='view customer orders' name='view_customer_orders' >
-			<input type='submit' value='logout' name='submit_logout' >
+			<input type='submit' value='Update customer information' name='submit_updateCustomer' >
+			<input type='submit' value='View customer orders' name='view_customer_orders' >
+			<input type='submit' value='Logout' name='submit_logout' >
 		</form>
 	</div>
 </section>
@@ -136,7 +136,7 @@
 
 <?php
 	if(isset($_POST['submit_updateCustomer'])){
-		echo "you want to see the customer information?";
+		//echo "Customer information";
 		echo "<table border=1> <tr><th> Password </th> <th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
 		$dbServername="localhost";
 		$dbUsername="root";
@@ -149,21 +149,21 @@
 		$row=mysqli_fetch_array($result);	
 		echo "<form action='customerLoggedin.php' method='POST'>";
 		echo "<tr>";
-		echo "<td>" ."<input type=text name= Password value= ". $row['Password']. " </td>";
-		echo "<td>" ."<input type=text name= FirstName value= ". $row['FirstName']. " </td>"; 
-		echo "<td>" ."<input type=text name= LastName value= ". $row['LastName']. " </td>"; 
-		echo "<td>" ."<input type=text name= Address value= ". $row['Address']. " </td>";
-		echo "<td>" ."<input type=text name= Email value= ". $row['Email']. " </td>";
-		echo "<td>" ."<input type=text name= PhoneNumber value= ". $row['PhoneNumber']. " </td>";
-		echo "<td>" ."<input type=hidden name= hidden_CustomerId value= ". $row['CustomerId']. " </td>";
-		echo "<td>" ."<input type=submit name= update_CustomerInfor value= update ". " </td>";
+		echo "<td>" ."<input type=text name= Password value= '". $row['Password']. "' </td>";
+		echo "<td>" ."<input type=text name= FirstName value= '". $row['FirstName']. "' </td>"; 
+		echo "<td>" ."<input type=text name= LastName value= '". $row['LastName']. "' </td>"; 
+		echo "<td>" ."<input type=text name= Address value= '". $row['Address']. "' </td>";
+		echo "<td>" ."<input type=text name= Email value= '". $row['Email']. "' </td>";
+		echo "<td>" ."<input type=text name= PhoneNumber value= '". $row['PhoneNumber']. "' </td>";
+		echo "<td>" ."<input type=hidden name= hidden_CustomerId value= '". $row['CustomerId']. "' </td>";
+		echo "<td>" ."<input type=submit name= update_CustomerInfor value= Update ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
 	}
 		
 	}
 	else if(isset($_POST['submit_logout'])){
-		echo "you logout! Now redirecting you to the homepage!";
+		echo "You are logged out! Now redirecting you to the homepage!";
 		unset($_SESSION['isCustomerLogin']['duration']);
 		unset($_SESSION['isCustomerLogin']['start']);
 		unset($_SESSION['isCustomerLogin']['logintype']);
