@@ -35,11 +35,20 @@
 		$dbName="ecommence";
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
 		$sql_see_orders="SELECT * FROM customerorders WHERE CustomerId = ". $CustomerId. ";";
-		echo $sql_see_orders;
 		$result=mysqli_query($conn,$sql_see_orders);
 		if(mysqli_num_rows($result)!=0){
+			$orderIdArray=array();
 			$row=mysqli_fetch_array($result);
-				
+			do{
+				array_push($orderIdArray,$row['OrderId']);
+			}while($row=mysqli_fetch_array($result));
+			for($i=0;$i<count($orderIdArray);$i++){
+				echo "THERE ORDER YOU HAVE IS: ";
+				echo $orderIdArray[$i];
+				$orderId=$orderIdArray[$i];
+				$order_search_query="SELECT * FROM ";
+				echo "<br>";
+		 }
 		}
 		else if (mysqli_num_rows($result)==0){
 			echo "There is no order history in you account!";

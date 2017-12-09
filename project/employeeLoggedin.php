@@ -66,6 +66,19 @@
 			}
 		}
 	}
+	if(isset($_POST['submit_add_ship'])){
+			$dbServername="localhost";
+			$dbUsername="root";
+			$dbPassword="12345";
+			$dbName="ecommence";		
+			$ShipDetail=$_POST['ShipDetail'];
+			$ShipType=$_POST['ShipType'];
+			$ShipCharge=$_POST['ShipCharge'];
+			$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
+			$sql= "INSERT INTO shipment (ShipmentDetail, ShipmentType, ShipmentCharge ) VALUES ('" .$ShipDetail ."',"."'" .$ShipType."'". " , ". $ShipCharge.");";
+			echo $sql;
+			mysqli_query($conn,$sql);
+	}
 	 if (isset($_POST['update'])){
 		$sql_update="UPDATE inventory SET ItemName = "."'".$_POST['ItemName'] ."',"." Price= ". $_POST['ItemPrice'] .","." Quantity = ". $_POST['Quantity'].", SellerId = ".$_POST['SellerId']. ","." ItemId = ".$_POST['ItemId'] ." WHERE ItemId = ".$_POST['hidden_ItemId'] .";";
 		echo $sql_update;
@@ -107,7 +120,7 @@
 		do {
 		echo "<form action='employeeLoggedin.php' method='POST'>";
 		echo "<tr>";
-		echo "<td>" ."<input type=text name= SellerId value= ". $row['SellerId']. " </td>";
+		echo "<td>" . $row['SellerId']. " </td>";
 		echo "<td>" ."<input type=text name= ItemId value= ". $row['ItemId']. " </td>";
 		echo "<td>" ."<input type=text name= ItemName value= ". $row['ItemName']. " </td>"; 
 		echo "<td>" ."<input type=text name= ItemPrice value= ". $row['Price']. " </td>"; 
@@ -138,7 +151,23 @@
 		echo ".sellerupdate-form input{float:left; width:90%; height:40px; padding:0px 5%;margin-right:10px;margin-bottom:4px;border:none;background-color:#fff;font-family:arial;font-size:16px;color: #111;line-height:40px;";
 		echo "</style>";
 		echo "</section>";
-}
+	}else if(isset($_POST['submit_add_shipment'])){
+		echo "<section class='main-container'> ";
+		echo "<div class='main-wrapper'>";
+		echo "<h2>Add shipment option</h2>";
+		echo "<form class='shipment-form'  method='POST'>";
+		echo "<input type='text' name='ShipDetail' placeholder='ShipDetail' required>";
+		echo "<input type='text' name='ShipType' placeholder='ShipType' required>";
+		echo "<input type='text' name='ShipCharge' placeholder='ShipCharge' required>";
+		echo "<input type='submit' value='add' name='submit_add_ship' >";
+		echo "</form>";
+		echo "</div>";
+		echo "<style>";
+		echo ".shipment-form{ width:400px; margin:0 auto; padding-top:30px;	}";
+		echo ".shipment-form input{float:left; width:90%; height:40px; padding:0px 5%;margin-right:10px;margin-bottom:4px;border:none;background-color:#fff;font-family:arial;font-size:16px;color: #111;line-height:40px;";
+		echo "</style>";
+		echo "</section>";
+	}
 	
 	else if(isset($_POST['submit_updateEmployee'])){
 		echo "<table border=1><tr><th>  EmployeeId  </th><th>  Role  </th> <th>  DateJoined  </th><th> Password </th> <th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
