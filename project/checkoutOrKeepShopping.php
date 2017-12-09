@@ -94,11 +94,7 @@ else if (isset($_POST['checkout'])){
 		echo "<td>" ."<input type=text name= shipmentdetail value= ". "next-day". " ></td>"; 
 		echo "<td>" ."<input type=text name= shipmenttype value= "."USPS". " ></td>"; 
 		echo "<td>" . "10.00 ". "</td>";
-<<<<<<< HEAD
 		echo "<td>" ."<input type=submit name= update_shippingInfor value= 'Use this shipment type' ". " </td>";
-=======
-		echo "<td>" ."<input type=submit name= update_shippingInfor value= usethisshipmenttype ". " </td>";
->>>>>>> 84a12faaedfadebbe97e06cf4b1b9edfd4536878
 		echo "</tr>";
 		echo "</form>";
 	
