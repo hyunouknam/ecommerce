@@ -37,7 +37,7 @@
 		$result=mysqli_query($conn,$sql);
 		$resultCheck=mysqli_num_rows($result);		
 		if($resultCheck>=1){
-			echo "You can only update the quantiy of the items listed.";
+			echo "You can only update the quantity of the items listed.";
 			$row=mysqli_fetch_array($result);
 			$oldQuantity=$row['Quantity'];
 			$newQuantity= $Quantity+$oldQuantity;
@@ -121,12 +121,12 @@
 		echo "<form action='employeeLoggedin.php' method='POST'>";
 		echo "<tr>";
 		echo "<td>" . $row['SellerId']. " </td>";
-		echo "<td>" ."<input type=text name= ItemId value= ". $row['ItemId']. " </td>";
-		echo "<td>" ."<input type=text name= ItemName value= ". $row['ItemName']. " </td>"; 
-		echo "<td>" ."<input type=text name= ItemPrice value= ". $row['Price']. " </td>"; 
-		echo "<td>" ."<input type=text name= Quantity value= ". $row['Quantity']. " </td>";
-		echo "<td>" ."<input type=hidden name= hidden_SellerId value= ". $row['SellerId']. " </td>";
-		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ". $row['ItemId']. " </td>";
+		echo "<td>" ."<input type=text name= ItemId value= '". $row['ItemId']. "' </td>";
+		echo "<td>" ."<input type=text name= ItemName value= '". $row['ItemName']. "' </td>"; 
+		echo "<td>" ."<input type=text name= ItemPrice value= '". $row['Price']. "' </td>"; 
+		echo "<td>" ."<input type=text name= Quantity value= '". $row['Quantity']. "' </td>";
+		echo "<td>" ."<input type=hidden name= hidden_SellerId value= '". $row['SellerId']. "' </td>";
+		echo "<td>" ."<input type=hidden name= hidden_ItemId value= '". $row['ItemId']. "' </td>";
 		echo "<td>" ."<input type=submit name= update value= update ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
@@ -185,13 +185,13 @@
 		echo "<td>" . "  ".$row['EmployeeId']. " </td>";
 		echo "<td>" . "  ".$row['Role']. " </td>";
 		echo "<td>" . "  ".$row['DateJoined']. " </td>";
-		echo "<td>" ."<input type=text name= Password value= ". $row['Password']. " </td>";
-		echo "<td>" ."<input type=text name= FirstName value= ". $row['FirstName']. " </td>"; 
-		echo "<td>" ."<input type=text name= LastName value= ". $row['LastName']. " </td>"; 
-		echo "<td>" ."<input type=text name= Address value= ". $row['Address']. " </td>";
-		echo "<td>" ."<input type=text name= Email value= ". $row['Email']. " </td>";
-		echo "<td>" ."<input type=text name= PhoneNumber value= ". $row['PhoneNumber']. " </td>";		
-		echo "<td>" ."<input type=hidden name= hidden_Employee value= ". $row['EmployeeId']. " </td>";
+		echo "<td>" ."<input type=text name= Password value= '". $row['Password']. "' </td>";
+		echo "<td>" ."<input type=text name= FirstName value= '". $row['FirstName']. "' </td>"; 
+		echo "<td>" ."<input type=text name= LastName value= '". $row['LastName']. "' </td>"; 
+		echo "<td>" ."<input type=text name= Address value= '". $row['Address']. "' </td>";
+		echo "<td>" ."<input type=text name= Email value= '". $row['Email']. "' </td>";
+		echo "<td>" ."<input type=text name= PhoneNumber value= '". $row['PhoneNumber']. "' </td>";		
+		echo "<td>" ."<input type=hidden name= hidden_Employee value= '". $row['EmployeeId']. "' </td>";
 		echo "<td>" ."<input type=submit name= update_EmployeeInfor value= update ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 

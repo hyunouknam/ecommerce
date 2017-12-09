@@ -14,10 +14,10 @@
 <section class="main-container"> 
 	<div class="main-wrapper">
 		<form class="sellerfunction"  method="POST" >
-			<input type='submit' value='see what is in shop' name='submit_seeitems' >			
-			<input type='submit' value='add items to shop' name='submit_additems' >
-			<input type='submit' value='update seller information' name='submit_updateSeller' >
-			<input type='submit' value='logout' name='submit_logout' >
+			<input type='submit' value='See what is in shop' name='submit_seeitems' >			
+			<input type='submit' value='Add items to shop' name='submit_additems' >
+			<input type='submit' value='Update seller information' name='submit_updateSeller' >
+			<input type='submit' value='Logout' name='submit_logout' >
 		</form>
 	</div>
 </section>
@@ -48,7 +48,7 @@
 		}
 		else if ($resultCheck==0){
 			$sql= "INSERT INTO inventory (SellerId, ItemName, Quantity, Price ) VALUES (" .$SellerId .","."' " .$ItemName." '". " , ". $quantity. " , ". $price. ");";
-			echo $sql;
+			echo "Item added successfully!";
 			mysqli_query($conn,$sql);
 		}
 	}
@@ -91,7 +91,7 @@
 		do {
 		echo "<form action='sellerLoggedin.php' method='POST'>";
 		echo "<tr>";
-		echo "<td>" ."<input type=text name= ItemName value= ". $row['ItemName']. " </td>"; 
+		echo "<td>" ."<input type=text name= ItemName value='". $row['ItemName'] ." ' </td>"; 
 		echo "<td>" ."<input type=text name= ItemPrice value= ". $row['Price']. " </td>"; 
 		echo "<td>" ."<input type=text name= Quantity value= ". $row['Quantity']. " </td>";
 		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ". $row['ItemId']. " </td>";
@@ -105,10 +105,10 @@
 	else if (isset($_POST['submit_additems'])){
 		echo "<section class='main-container'> ";
 		echo "<div class='main-wrapper'>";
-		echo "<h2>add items to shop</h2>";
+		echo "<h2>Add item to shop</h2>";
 		echo "<form class='sellerupdate-form'  method='POST'>";
-		echo "<input type='text' name='itemname' placeholder='itemname' required>";
-		echo "<input type='text' name='price' placeholder='price in $' required>";
+		echo "<input type='text' name='itemname' placeholder='item name' required>";
+		echo "<input type='text' name='price' placeholder='price' required>";
 		echo "<input type='text' name='quantity' placeholder='quantity' required>";
 		echo "<input type='submit' value='add' name='submit_add' >";
 		echo "</form>";
@@ -124,7 +124,7 @@
 }
 	
 	else if(isset($_POST['submit_updateSeller'])){
-		echo "you want to see the seller information?";
+		//echo "you want to see the seller information?";
 		echo "<table border=1> <tr><th> Password </th> <th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
 		$dbServername="localhost";
 		$dbUsername="root";
@@ -137,13 +137,13 @@
 		$row=mysqli_fetch_array($result);	
 		echo "<form action='sellerLoggedin.php' method='POST'>";
 		echo "<tr>";
-		echo "<td>" ."<input type=text name= Password value= ". $row['Password']. " </td>";
-		echo "<td>" ."<input type=text name= FirstName value= ". $row['FirstName']. " </td>"; 
-		echo "<td>" ."<input type=text name= LastName value= ". $row['LastName']. " </td>"; 
-		echo "<td>" ."<input type=text name= Address value= ". $row['Address']. " </td>";
-		echo "<td>" ."<input type=text name= Email value= ". $row['Email']. " </td>";
-		echo "<td>" ."<input type=text name= PhoneNumber value= ". $row['PhoneNumber']. " </td>";
-		echo "<td>" ."<input type=hidden name= hidden_SellerId value= ". $row['SellerId']. " </td>";
+		echo "<td>" ."<input type=text name= Password value= '". $row['Password']. "' </td>";
+		echo "<td>" ."<input type=text name= FirstName value= '". $row['FirstName']. "' </td>"; 
+		echo "<td>" ."<input type=text name= LastName value= '". $row['LastName']. "' </td>"; 
+		echo "<td>" ."<input type=text name= Address value= '". $row['Address']. "' </td>";
+		echo "<td>" ."<input type=text name= Email value= '". $row['Email']. "' </td>";
+		echo "<td>" ."<input type=text name= PhoneNumber value= '". $row['PhoneNumber']. "' </td>";
+		echo "<td>" ."<input type=hidden name= hidden_SellerId value= '". $row['SellerId']. "' </td>";
 		echo "<td>" ."<input type=submit name= update_SellerInfor value= update ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
@@ -151,7 +151,7 @@
 		
 	}
 	else if(isset($_POST['submit_logout'])){
-		echo "you logout! Now redirecting you to the homepage!";
+		echo "You are logged out! Now redirecting you to the homepage!";
 		unset($_SESSION['isSellerLogin']['duration']);
 		unset($_SESSION['isSellerLogin']['start']);
 		unset($_SESSION['isSellerLogin']['logintype']);
