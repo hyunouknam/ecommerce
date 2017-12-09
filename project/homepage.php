@@ -36,7 +36,7 @@
 	<div class ="search_class">Search the products you want to buy 
 	<form name ='form1' method ='POST'	action='searchresults.php'>
 	<input name = 'search' type='text' size='40' maxlength='50'/>
-	<input type = 'submit' name ='submit' value='search' />
+	<input type = 'submit' name ='submit' value='Search' />
 	</form>
 	</div>
 	<style>
@@ -52,7 +52,7 @@
 	} 
 	</style>
 </section>
-<div class="login_class">login as customer or employee or seller?
+<div class="login_class">Login as a Customer, Seller, or Employee
 		<form action=login.php>
 		<input type ='submit' method='POST' name='submit' value='Login' >
 		</form>
@@ -71,7 +71,7 @@
 	</style>
 </div>
 
-<div class="signupclass">sign up as customer or employee or seller?
+<div class="signupclass">Sign up as a Customer, Seller, or Employee
 			<form>
 			<?php
 			$signuptype=array('Customer','Seller','Employee');
@@ -79,7 +79,7 @@
 			echo get_options($signuptype);
 			echo '</select>';
 			?>	
-			<input type ='submit'>
+			<input type ='submit' value='Sign Up' >
 			</form>
 		<style>
 			.signuptype{	

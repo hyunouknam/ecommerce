@@ -1,8 +1,7 @@
 <?php
 	include_once 'header.php'; 
-	session_start();
 	if (!isset($_SESSION['isEmployeeLogin'])){
-	echo "you are not login, now directing you to main page!";
+	echo "You are not logged in. Now directing you to main page!";
 	header( "refresh:3;url=homepage.php" );
 	exit();
 	}	
@@ -15,10 +14,10 @@
 <section class="main-container"> 
 	<div class="main-wrapper">
 		<form class="employeefunction"  method="POST" >
-			<input type='submit' value='see what is in inventory' name='submit_seeitems' >			
-			<input type='submit' value='add items to inventory' name='submit_add_inventory' >
-			<input type='submit' value='update employee information' name='submit_updateEmployee' >
-			<input type='submit' value='logout' name='submit_logout' >
+			<input type='submit' value='See what is in inventory' name='submit_seeitems' >			
+			<input type='submit' value='Add items to inventory' name='submit_add_inventory' >
+			<input type='submit' value='Update employee information' name='submit_updateEmployee' >
+			<input type='submit' value='Logout' name='submit_logout' >
 		</form>
 	</div>
 </section>
@@ -38,7 +37,7 @@
 		$result=mysqli_query($conn,$sql);
 		$resultCheck=mysqli_num_rows($result);		
 		if($resultCheck>=1){
-			echo "there is this item in this seller account, (not add new itemid and no change in price)will just update the quantity!";
+			echo "You can only update the quantiy of the items listed.";
 			$row=mysqli_fetch_array($result);
 			$oldQuantity=$row['Quantity'];
 			$newQuantity= $Quantity+$oldQuantity;
@@ -53,9 +52,9 @@
 			$result_search_seller=mysqli_query($conn,$sql_search_seller);
 			$result_search_seller_check=mysqli_num_rows($result_search_seller);
 			if ($result_search_seller_check==0){
-				echo "there seller dose not exist in the seller table, you need to SIGNUP the seller first";
+				echo "This seller does not exist";
 				echo "<br>";
-				echo "now directing you to the homepage, please select signup from there!";
+				echo "Now redirecting you to homepage. Please sign up there.";
 				header( "refresh:3;url=homepage.php" );
 				//$sql_insert_seller= "INSERT INTO seller (SellerId) VALUES ( " .$SellerId. ");";
 				//mysqli_query($conn,$sql_insert_seller);
@@ -125,7 +124,7 @@
 	else if (isset($_POST['submit_add_inventory'])){
 		echo "<section class='main-container'> ";
 		echo "<div class='main-wrapper'>";
-		echo "<h2>add things to inventory</h2>";
+		echo "<h2>Add items to inventory</h2>";
 		echo "<form class='employee-form'  method='POST'>";
 		echo "<input type='text' name='SellerId' placeholder='SellerId' required>";
 		echo "<input type='text' name='ItemName' placeholder='ItemName' required>";
@@ -142,7 +141,6 @@
 }
 	
 	else if(isset($_POST['submit_updateEmployee'])){
-		echo "you want to see the seller information?";
 		echo "<table border=1><tr><th>  EmployeeId  </th><th>  Role  </th> <th>  DateJoined  </th><th> Password </th> <th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
 		$dbServername="localhost";
 		$dbUsername="root";
@@ -172,7 +170,7 @@
 		
 	}
 	else if(isset($_POST['submit_logout'])){
-		echo "you logout! Now redirecting you to the homepage!";
+		echo "You are logged out! Now redirecting you to the homepage!";
 		unset($_SESSION['isEmployeeLogin']['duration']);
 		unset($_SESSION['isEmployeeLogin']['start']);
 		unset($_SESSION['isEmployeeLogin']['logintype']);

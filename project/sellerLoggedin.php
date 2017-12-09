@@ -1,7 +1,7 @@
 <?php
 	include_once 'header.php'; 
 	if (!isset($_SESSION['isSellerLogin'])){
-		echo "you are not login, now directing you to main page!";
+		echo "You are not logged, redirecting you to homepage!";
 		header( "refresh:3;url=homepage.php" );
 		exit();
 	}	
@@ -35,7 +35,7 @@
 		$result=mysqli_query($conn,$sql);
 		$resultCheck=mysqli_num_rows($result);		
 		if($resultCheck>=1){
-			echo "there is this item in shop, will not update the price just update the quantity is fine!";
+			echo "You can update the quantity.";
 			$row=mysqli_fetch_array($result);
 			$oldQuantity=$row['Quantity'];
 			$newQuantity= $quantity+$oldQuantity;

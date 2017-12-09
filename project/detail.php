@@ -104,7 +104,7 @@
 	if (isset($_SESSION['isCustomerLogin'])){
 		echo '<section class="main-container">';
 		echo '<div class="main-wrapper">';
-		echo "<h2>Write Review</h2>";
+		echo "<h2>Write a Review</h2>";
 		echo '<form class="signup-form"  method="POST">';
 		echo '<input type="text" name="rating" placeholder="Rate from 1 - 5" required>';
 		echo '<input type="text" name="detailedreview" placeholder="Write your thoughts on the item..." required>';

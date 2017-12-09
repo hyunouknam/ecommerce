@@ -1,6 +1,5 @@
 <?php
 	include_once 'header.php';	
-	session_start();
 	$CustomerId=$_SESSION['isCustomerLogin']['Id'];
 	$dbServername="localhost";
 	$dbUsername="root";
@@ -30,12 +29,12 @@
 </div>
 <?php
 if (isset($_POST['keepsearch'])){
-	echo "you want keep searching??";
+	echo "You want keep searching?";
 	header( "refresh:2;url=searchresults.php" );
 	exit();
 }
 else if(isset($_POST['submit_logout'])){
-		echo "you logout! Now redirecting you to the homepage!";
+		echo "You are logged out! Redirecting you to the homepage!";
 		unset($_SESSION['isCustomerLogin']['duration']);
 		unset($_SESSION['isCustomerLogin']['start']);
 		unset($_SESSION['isCustomerLogin']['logintype']);
@@ -77,13 +76,13 @@ else if (isset($_POST['checkout'])){
 		echo "<td>" ."<input type=text name= Address value= ". $row['Address']. " ></td>";
 		echo "<td>" ."<input type=text name= Email value= ". $row['Email']. " ></td>";
 		echo "<td>" ."<input type=text name= PhoneNumber value= ". $row['PhoneNumber']. "> </td>";
-		echo "<td>" ."<input type=submit name= update_shippingAddress value= ChangeToThisAddress ". "></td>";
+		echo "<td>" ."<input type=submit name= update_shipping Address value= Change To This Address ". "></td>";
 		echo "</tr>";
 		echo "</form>"; 
 	}	
 	// shipment information
 		echo "<table border=1> <tr><th> shipmentDetail </th> <th> ShipmentType </th> <th> ShipCharge </th></tr>";	
-		echo "<h1> shipment information</h1>";
+		echo "<h1> Shipment information</h1>";
 		echo "shipdetail: next-day/regular";
 		echo "shiptype: USPS/UPS";		
 		echo "<form  method='POST'>";
@@ -98,7 +97,7 @@ else if (isset($_POST['checkout'])){
 	
 	// payment information
 	echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
-	echo "<h2> You payment information</h2>";
+	echo "<h2> Your payment information</h2>";
 		echo "<form  method='POST'>";
 		echo "<tr>";
 		$_SESSION['paymentInfor']=array();
@@ -154,7 +153,7 @@ else if (isset($_POST['checkout'])){
 	if (isset($_POST['ViewAddressInfo'])){
 		if (count($_SESSION['addressInfor'])==0){			
 			echo "No address information available";
-			echo "<h1> No address infor is available you can add it here</h1>";
+			echo "<h1> No address info is available. You can add it here</h1>";
 			echo "<table border=1> <tr><th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
 			echo "<form  method='POST'>";
 			echo "<tr>";
@@ -163,7 +162,7 @@ else if (isset($_POST['checkout'])){
 			echo "<td>" ."<input type=text name= Address value= "." ". " ></td>";
 			echo "<td>" ."<input type=text name= Email value= ". " ". " ></td>";
 			echo "<td>" ."<input type=text name= PhoneNumber value= ". " ". "> </td>";
-			echo "<td>" ."<input type=submit name= update_shippingAddress value= ChangeToThisAddress ". " </td>";
+			echo "<td>" ."<input type=submit name= update_shippingAddress value= Change ". " </td>";
 			echo "</tr>";
 			echo "</form>"; 
 		}
@@ -184,9 +183,9 @@ else if (isset($_POST['checkout'])){
 	}
 	if (isset($_POST['ViewPaymentInfo'])){
 		if (count($_SESSION['paymentInfor'])==0){
-			echo "No PaymentInfor available! You can update here!";
+			echo "No payment info available! You can update here!";
 			echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
-			echo "<h2> You payment information</h2>";
+			echo "<h2> Your payment information</h2>";
 			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= CardType value= "."". " ></td>"; 
@@ -198,7 +197,7 @@ else if (isset($_POST['checkout'])){
 		}
 		else{
 			echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
-			echo "<h2> You payment information</h2>";
+			echo "<h2> Your payment information</h2>";
 			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= CardType value= ".$_SESSION['paymentInfor'][0]. " ></td>"; 
@@ -212,7 +211,7 @@ else if (isset($_POST['checkout'])){
 	// view ship infor
 	if (isset($_POST['ViewShipInfo'])){
 		if (count($_SESSION['shipInfor'])==0){
-			echo "No ShipInfor available! You can update here!";
+			echo "No shipment information available! You can update here!";
 			echo "shipdetail: next-day/regular";
 			echo "shiptype: USPS/UPS";	
 			echo "<table border=1> <tr><th> shipmentDetail </th> <th> shipmenttype </th> <th> shipmentcharge </th></tr>";	
@@ -230,7 +229,7 @@ else if (isset($_POST['checkout'])){
 			echo "shipdetail: next-day/regular";
 			echo "shiptype: USPS/UPS";	
 			echo "<table border=1> <tr><th> shipmentDetail </th> <th> shipmenttype </th> <th> shipmentcharge </th></tr>";	
-			echo "<h2> You payment information</h2>";
+			echo "<h2> You shipment information</h2>";
 			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= shipmentdetail value= ".$_SESSION['shipInfor'][0]. " ></td>"; 

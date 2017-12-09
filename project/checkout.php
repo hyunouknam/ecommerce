@@ -1,24 +1,23 @@
 <?php
 	// need to check if the ssession variables has value greater than 0
 	include_once 'header.php';	
-	session_start();
 	$CustomerId=$_SESSION['isCustomerLogin']['Id'];
 	$addressInfor=$_SESSION['addressInfor'];
 	$paymentInfor=$_SESSION['paymentInfor'];
 	$shipmentInfor=$_SESSION['shipInfor'];
 	$itemsInShoppingCart=$_SESSION['productsAdded'];
 	if (count($addressInfor)<5){
-		echo "customer address infor not complete!";
+		echo "Customer address info is not complete!";
 		header( "refresh:3;url=checkoutOrKeepShopping.php" );
 		exit();
 	}
 	else if (count($paymentInfor)<3){
-		echo "payment infor not complete!";
+		echo "Payment info is not complete!";
 		header( "refresh:3;url=checkoutOrKeepShopping.php" );
 		exit();
 	}
 	else if (count($shipmentInfor)<3){
-		echo "shipment infor not complete!";
+		echo "Shipment info is not complete!";
 		header( "refresh:3;url=checkoutOrKeepShopping.php" );
 		exit();		
 	}
@@ -37,7 +36,7 @@
 </div>
 <?php
 	if(isset($_POST['submit_logout'])){
-		echo "you logout! Now redirecting you to the homepage!";
+		echo "You are logged out! Redirecting you to the homepage!";
 		unset($_SESSION['isCustomerLogin']['duration']);
 		unset($_SESSION['isCustomerLogin']['start']);
 		unset($_SESSION['isCustomerLogin']['logintype']);
@@ -76,7 +75,7 @@
 		echo "</form>"; 
 
 		echo "<table border=1> <tr><th> shipmentDetail </th> <th> ShipmentType </th> <th> ShipCharge </th></tr>";	
-		echo "<h1> shipment information</h1>";
+		echo "<h1> Shipment information</h1>";
 		echo "shipdetail: next-day/regular";
 		echo "shiptype: USPS/UPS";		
 		echo "<form  method='POST'>";
@@ -88,7 +87,7 @@
 		echo "</form>";	
 	// payment information
 		echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
-		echo "<h2> You payment information</h2>";
+		echo "<h2> Your payment information</h2>";
 		echo "<form  method='POST'>";
 		echo "<tr>";		
 		echo "<td>".$_SESSION['paymentInfor'][0]. "</td>"; 

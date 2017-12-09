@@ -42,7 +42,7 @@
 				
 		}
 		else if (mysqli_num_rows($result)==0){
-			echo "there is no order history in you account!";
+			echo "There is no order history in you account!";
 		}
 	}	
 	
@@ -67,7 +67,7 @@
 		vertical-align:middle;
 	} 
 	</style>
-	<div class="customerAccount">Now you are Login as customer, here's what you can do:
+	<div class="customerAccount">Now you are logged in as customer, here's what you can do:
 	<section class="main-container"> 
 	<div class="main-wrapper">
 		<form class="sellerfunction"  method="POST" >
@@ -88,7 +88,7 @@
 
 <?php
 	if(isset($_POST['submit_updateCustomer'])){
-		echo "you want to see the customer information?";
+		echo "Customer information";
 		echo "<table border=1> <tr><th> Password </th> <th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
 		$dbServername="localhost";
 		$dbUsername="root";
@@ -115,7 +115,7 @@
 		
 	}
 	else if(isset($_POST['submit_logout'])){
-		echo "you logout! Now redirecting you to the homepage!";
+		echo "You are logged out! Now redirecting you to the homepage!";
 		unset($_SESSION['isCustomerLogin']['duration']);
 		unset($_SESSION['isCustomerLogin']['start']);
 		unset($_SESSION['isCustomerLogin']['logintype']);

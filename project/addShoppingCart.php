@@ -15,20 +15,20 @@
 			unset($_SESSION['productsAdded']);
 			session_destroy();
 			echo "</br>";
-			echo "Now I am redirecting you to the Login page";		
+			echo "Redirecting you to the homepage";		
 			header( "refresh:3;url=login.php?statust=error&msg=No session found. Please login!" );	
 			exit();
 		}
 		else {
-			echo "you are all set!!!";
+			echo "You are set!";
 			echo "</br>";
-			echo "and you are NOT time out!";
+			//echo "and you are NOT time out!";
 		}
 	}	
 	else{
-		echo "You are not log in as Customer, you can't add to shopping cart!";
+		echo "You are not logged in as Customer, you can't add to shopping cart!";
 		echo "</br>";
-		echo "Now I am redirecting you to the Login page";		
+		echo "Redirecting you to the Login page";		
 		header( "refresh:3;url=login.php?statust=error&msg=No session found. Please login!" );
 		exit();
 	}	
@@ -81,7 +81,7 @@
 		$_SESSION['productsAdded']=$myselection;
 	}
 ?>
-<div class ="seewhat's in shopping cart">
+<div class ="See what's in the shopping cart">
 	<form method='POST' action= 'addShoppingCart.php'>
 	<input type='submit' name= 'ShoppingCart' value='ShoppingCart' >
 	<input type='submit' name= 'submit_logout' value='Logout' >
@@ -113,7 +113,7 @@
 		}
 	}
 	else if(isset($_POST['submit_logout'])){
-		echo "you logout! Now redirecting you to the homepage!";
+		echo "You are logged out! Redirecting you to the homepage!";
 		unset($_SESSION['isCustomerLogin']['duration']);
 		unset($_SESSION['isCustomerLogin']['start']);
 		unset($_SESSION['isCustomerLogin']['logintype']);

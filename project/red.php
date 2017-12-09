@@ -7,7 +7,7 @@
 		
 		</style>
 		</section>
-		<div class="login_class">login as customer or employee or seller?
+		<div class="login_class">Login as Customer, Seller, or Employee?
 				<select class="select-class", name="login-type">
 					<option value="">Select...</option>
 					<option value="Customer">Customer</option>
@@ -43,7 +43,7 @@
 	
 	
 	</div>
-		<div class="signupclass">sign up as customer or employee or seller?
+		<div class="signupclass">Sign up as Customer, Seller, or Employee?
 				<select class="signuptype">
 					<option value="">Select...</option>
 					<option value="Customer">Customer</option>

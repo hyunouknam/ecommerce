@@ -4,7 +4,7 @@
 	if(!isset($_SESSION)){
     	session_start();
 	}
-	$duration=600; /*600 seconds */
+	$duration=3600; /*3600 seconds */
 	$dbServername="localhost";
 	$dbUsername="root";
 	$dbPassword="12345";
@@ -28,7 +28,7 @@
 				session_destroy();
 			}		
 			else{
-				echo "you have to logout the current user first";
+				echo "You have to logout of the current user first";
 				header( "refresh:5;url=customerLoggedin.php?statust=error&msg=you should logout first!" );	
 				exit();
 			}
@@ -58,8 +58,8 @@
 		if($resultCheck_customer==1){
 				$obj = $result_customer->fetch_object();
 				if ($password==$obj->Password){
-					echo "<P> customer Login successfully!!! </p>";
-					echo "<P>now directing you to search page!!! </p>";
+					echo "<P> Customer logged in successfully! </p>";
+					echo "<P>Now directing you to search page! </p>";
 					$_SESSION['isCustomerLogin']=array(
 						"start"=>time(),
 						"duration"=>$duration,
@@ -67,11 +67,11 @@
 						"Id"=>($obj->CustomerId),
 					);
 					$_SESSION['productsAdded']=array();
-					header( "refresh:5;url=customerLoggedin.php" );				
+					header( "refresh:3;url=customerLoggedin.php" );				
 					exit();
 				}
 				else {
-					echo "wrong password, try agin!";
+					echo "Wrong password, try agin!";
 					header( "refresh:2;url=login.php" );	
 					exit();
 				}
@@ -79,19 +79,19 @@
 		else if($resultCheck_seller==1){
 				$obj = $result_seller->fetch_object();					
 				if ($password==$obj->Password){
-					echo "<P> seller Login successfully!!! </p>";
-					echo "<P>now directing you to where the seller_login shoud do page!!! </p>";
+					echo "<P> Seller logged in successfully!!! </p>";
+					echo "<P>Now redirecting you to seller page! </p>";
 					$_SESSION['isSellerLogin']=array(
 						"start"=>time(),
 						"duration"=>$duration,
 						"logintype"=>"SellerLogin",
 						"Id"=>($obj->SellerId),
 					);
-					header( "refresh:5;url=sellerLoggedin.php" );				
+					header( "refresh:3;url=sellerLoggedin.php" );				
 					exit();
 				}
 				else{
-					echo "wrong password, try agin!";
+					echo "Wrong password, try agin!";
 					header( "refresh:2;url=login.php" );	
 					exit();
 				}
@@ -99,15 +99,15 @@
 		else if ($resultCheck_employee==1){
 				$obj = $result_employee->fetch_object();
 				if ($password==$obj->Password){
-					echo "<P> employee Login successfully!!! </p>";
-					echo "<P>now directing you to employee supposed to page!!! </p>";
+					echo "<P> Employee Login successfully!!! </p>";
+					echo "<P>Now directing you to employee page!!! </p>";
 					$_SESSION['isEmployeeLogin']=array(
 						"start"=>time(),
 						"duration"=>$duration,
 						"logintype"=>"EmployeeLogin",
 						"Id"=>($obj->EmployeeId),
 					);
-					header( "refresh:5;url=employeeLoggedin.php" );				
+					header( "refresh:3;url=employeeLoggedin.php" );				
 					exit();	
 				}
 				else {
@@ -117,7 +117,7 @@
 				}
 		}
 		else{			
-			echo "accout dose not exist, try agin!";
+			echo "Account does not exist, try agin!";
 			header( "refresh:2;url=login.php" );	
 			exit();
 		} 

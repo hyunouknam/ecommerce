@@ -1,6 +1,5 @@
 <?php
 	include_once'header.php';
-	session_start();
 	$CustomerId=$_SESSION['isCustomerLogin']['Id'];
 	$addressInfor=$_SESSION['addressInfor'];
 	$paymentInfor=$_SESSION['paymentInfor'];
@@ -21,7 +20,7 @@
 			$sql_update= "UPDATE inventory SET Quantity = ".$new_quantity." WHERE ItemId = ".$_SESSION['productsAdded'][$i][1]. ";";
 			mysqli_query($conn,$sql_update);		
 		}
-		echo "you are all SET !!!!!";
+		//echo "you are all SET !!!!!";
 	// insert payment;
 	// first search if it exist alreay!
 	$sql_payment_exits="SELECT * FROM payment WHERE CustomerId = ". $CustomerId. " AND CardType = '".$paymentInfor[0]."' AND ExpirationDate = ". "'".$paymentInfor[1]."' AND CardNumber = ". "'".$paymentInfor[2]."';";
