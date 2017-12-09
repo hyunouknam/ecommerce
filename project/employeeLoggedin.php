@@ -121,21 +121,12 @@
 		echo "<form action='employeeLoggedin.php' method='POST'>";
 		echo "<tr>";
 		echo "<td>" . $row['SellerId']. " </td>";
-<<<<<<< HEAD
 		echo "<td>" . $row['ItemId']. " </td>";
 		echo "<td>" ."<input type=text name= ItemName value= ". $row['ItemName']. " </td>"; 
 		echo "<td>" ."<input type=text name= ItemPrice value= ". $row['Price']. " </td>"; 
 		echo "<td>" ."<input type=text name= Quantity value= ". $row['Quantity']. " </td>";
 		echo "<td>" ."<input type=hidden name= hidden_SellerId value= ". $row['SellerId']. " </td>";
 		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ". $row['ItemId']. " </td>";
-=======
-		echo "<td>" ."<input type=text name= ItemId value= '". $row['ItemId']. "' </td>";
-		echo "<td>" ."<input type=text name= ItemName value= '". $row['ItemName']. "' </td>"; 
-		echo "<td>" ."<input type=text name= ItemPrice value= '". $row['Price']. "' </td>"; 
-		echo "<td>" ."<input type=text name= Quantity value= '". $row['Quantity']. "' </td>";
-		echo "<td>" ."<input type=hidden name= hidden_SellerId value= '". $row['SellerId']. "' </td>";
-		echo "<td>" ."<input type=hidden name= hidden_ItemId value= '". $row['ItemId']. "' </td>";
->>>>>>> 8f71dbd3afe26c271f9d099c95d1d62bddc970ad
 		echo "<td>" ."<input type=submit name= update value= update ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
