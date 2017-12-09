@@ -16,6 +16,7 @@
 		<form class="employeefunction"  method="POST" >
 			<input type='submit' value='See what is in inventory' name='submit_seeitems' >			
 			<input type='submit' value='Add items to inventory' name='submit_add_inventory' >
+			<input type='submit' value='Add items to inventory' name='submit_add_shipment' >
 			<input type='submit' value='Update employee information' name='submit_updateEmployee' >
 			<input type='submit' value='Logout' name='submit_logout' >
 		</form>
