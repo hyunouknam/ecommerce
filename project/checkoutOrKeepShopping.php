@@ -50,7 +50,7 @@ else if (isset($_POST['checkout'])){
 	echo "<p1> Items in shopping cart </p1>";
 	echo "<table border=1><tr><th>SellerId</th><th>ItemId</th><th>ItemName</th><th>Price</th><th>Quantity</th></tr>";	
 	for($i=0;$i<count($_SESSION['productsAdded']);$i++){
-		$_SESSION['totalCharge']=$totalChargeForItems+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
+		//$_SESSION['totalCharge']=$totalChargeForItems+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
 		echo "<form method='POST'>";
 		echo "<tr>";
 		echo "<td>" .$_SESSION['productsAdded'][$i][0]. " </td>"; 
@@ -90,7 +90,7 @@ else if (isset($_POST['checkout'])){
 		echo "<form  method='POST'>";
 		echo "<tr>";
 		$_SESSION['shipInfor']=array('next-day','USPS',10.00);
-		$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['shipInfor'][2];
+		//$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['shipInfor'][2];
 		echo "<td>" ."<input type=text name= shipmentdetail value= ". "next-day". " ></td>"; 
 		echo "<td>" ."<input type=text name= shipmenttype value= "."USPS". " ></td>"; 
 		echo "<td>" . "10.00 ". "</td>";
@@ -111,6 +111,11 @@ else if (isset($_POST['checkout'])){
 		echo "</tr>";
 		echo "</form>";		
 		// NOW ECHO THE TOTAL CHARGE INCLUSING THE SHIPPING 
+		$_SESSION['totalCharge']=0;
+		for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+			$_SESSION['totalCharge']=$totalChargeForItems+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
+		}
+		$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['shipInfor'][2];
 		echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
 		echo "<table border=1> <tr><th>".$_SESSION['totalCharge']."</th></tr>";	
 }
@@ -286,6 +291,11 @@ else if (isset($_POST['checkout'])){
 			echo "</tr>";
 			echo "</form>"; 
 		}
+		$_SESSION['totalCharge']=0;
+		for($i=0;$i<count($_SESSION['productsAdded']);$i++){
+			$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5];
+		}
+		$_SESSION['totalCharge']=$_SESSION['totalCharge']+$_SESSION['shipInfor'][2];
 		echo "<table border=1> <tr><th>TOTAL CHARGE IS </th></tr>";	
 		echo "<table border=1> <tr><th>".$_SESSION['totalCharge']."</th></tr>";	
 	}
