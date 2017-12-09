@@ -9,7 +9,9 @@
 <?php
 	$itemid = $_GET['itemid'];
 	$_SESSION['itemid'] = $itemid;
-	$customerid = $_SESSION['isCustomerLogin']['Id'];
+	if (isset($_SESSION['isCustomerLogin'])){
+		$customerid = $_SESSION['isCustomerLogin']['Id'];
+	}
 
 		// show item information
 		$conn=mysqli_connect($dbServername,$dbUsername,$dbPassword,$dbName);
@@ -80,12 +82,14 @@
 
 					echo "<br>".$row2['FirstName']. ' ' .$row2['LastName']. "</br>";
 
-					if($cid == $customerid){
-						$reviewid = $row['ReviewId'];
-						//echo '<form method="POST" action= "redirect.php?reviewid=">';
-						echo '<form method="POST" action= "redirect.php?reviewid=' .$reviewid. '">';
-						echo '<input type="submit" name= "DeleteReview" value="delete" >';
-						echo "</form>";
+					if (isset($_SESSION['isCustomerLogin'])){
+						if($cid == $customerid){
+							$reviewid = $row['ReviewId'];
+							//echo '<form method="POST" action= "redirect.php?reviewid=">';
+							echo '<form method="POST" action= "redirect.php?reviewid=' .$reviewid. '">';
+							echo '<input type="submit" name= "DeleteReview" value="delete" >';
+							echo "</form>";
+						}
 					}
 				}
 				///
