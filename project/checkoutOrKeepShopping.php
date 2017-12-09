@@ -83,7 +83,7 @@ else if (isset($_POST['checkout'])){
 		echo "</form>"; 
 	}	
 	// shipment information
-		echo "<table border=1> <tr><th> shipmentDetail </th> <th> ShipmentType </th> <th> ShipCharge </th></tr>";	
+		echo "<table border=1> <tr><th> Shipment detail </th> <th> Shipment type </th> <th> Shipment charge </th></tr>";	
 		echo "<h1> Shipment information</h1>";
 		echo "shipdetail: next-day/regular";
 		echo "shiptype: USPS/UPS";		
@@ -94,12 +94,12 @@ else if (isset($_POST['checkout'])){
 		echo "<td>" ."<input type=text name= shipmentdetail value= ". "next-day". " ></td>"; 
 		echo "<td>" ."<input type=text name= shipmenttype value= "."USPS". " ></td>"; 
 		echo "<td>" . "10.00 ". "</td>";
-		echo "<td>" ."<input type=submit name= update_shippingInfor value= usethisshipmenttype ". " </td>";
+		echo "<td>" ."<input type=submit name= update_shippingInfor value= 'Use this shipment type' ". " </td>";
 		echo "</tr>";
 		echo "</form>";
 	
 	// payment information
-	echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
+	echo "<table border=1> <tr><th> Card Type </th> <th> Expiration Date </th> <th> Card Number </th></tr>";	
 	echo "<h2> Your payment information</h2>";
 		echo "<form  method='POST'>";
 		echo "<tr>";
@@ -107,7 +107,7 @@ else if (isset($_POST['checkout'])){
 		echo "<td>" ."<input type=text name= CardType value= "." ". " ></td>"; 
 		echo "<td>" ."<input type=text name= ExpirationDate value= "." ". " ></td>"; 
 		echo "<td>" ."<input type=text name= CardNumber value= "." ". "> </td>";
-		echo "<td>" ."<input type=submit name= update_payment value= useThisPayment ". " </td>";
+		echo "<td>" ."<input type=submit name= update_payment value= 'Use this payment' ". " </td>";
 		echo "</tr>";
 		echo "</form>";		
 		// NOW ECHO THE TOTAL CHARGE INCLUSING THE SHIPPING 
@@ -199,7 +199,7 @@ else if (isset($_POST['checkout'])){
 		}
 		else {
 			echo "<h1> Use this address? (Customer's address)</h1>";
-			echo "<table border=1> <tr><th> FirstName </th> <th> LastName </th> <th> Address </th><th> Email </th><th> PhoneNumber </th></tr>";	
+			echo "<table border=1> <tr><th> First Name </th> <th> Last Name </th> <th> Address </th><th> Email </th><th> Phone Number </th></tr>";	
 			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= FirstName value= ".$_SESSION['addressInfor'][0] . " </td>"; 
@@ -227,7 +227,7 @@ else if (isset($_POST['checkout'])){
 			echo "</form>"; 
 		}
 		else{
-			echo "<table border=1> <tr><th> CardType </th> <th> ExpirationDate </th> <th> CardNumber </th></tr>";	
+			echo "<table border=1> <tr><th> Card Type </th> <th> Expiration Date </th> <th> Card Number </th></tr>";	
 			echo "<h2> Your payment information</h2>";
 			echo "<form  method='POST'>";
 			echo "<tr>";
@@ -245,8 +245,8 @@ else if (isset($_POST['checkout'])){
 			echo "No shipment information available! You can update here!";
 			echo "shipdetail: next-day/regular";
 			echo "shiptype: USPS/UPS";	
-			echo "<table border=1> <tr><th> shipmentDetail </th> <th> shipmenttype </th> <th> shipmentcharge </th></tr>";	
-			echo "<h2> You shipment information</h2>";
+			echo "<table border=1> <tr><th> Shipment detail </th> <th> Shipment type </th> <th> Shipment charge </th></tr>";	
+			echo "<h2> Your shipment information</h2>";
 			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= shipmentdetail value= "."". " ></td>"; 
@@ -259,8 +259,8 @@ else if (isset($_POST['checkout'])){
 		else{
 			echo "shipdetail: next-day/regular";
 			echo "shiptype: USPS/UPS";	
-			echo "<table border=1> <tr><th> shipmentDetail </th> <th> shipmenttype </th> <th> shipmentcharge </th></tr>";	
-			echo "<h2> You shipment information</h2>";
+			echo "<table border=1> <tr><th> Shipment detail </th> <th> Shipment type </th> <th> Shipment charge </th></tr>";	
+			echo "<h2> Your shipment information</h2>";
 			echo "<form  method='POST'>";
 			echo "<tr>";
 			echo "<td>" ."<input type=text name= shipmentdetail value= ".$_SESSION['shipInfor'][0]. " ></td>"; 
@@ -286,7 +286,7 @@ else if (isset($_POST['checkout'])){
 			echo "</tr>";
 			echo "</form>"; 
 		}
-		echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
+		echo "<table border=1> <tr><th>TOTAL CHARGE IS </th></tr>";	
 		echo "<table border=1> <tr><th>".$_SESSION['totalCharge']."</th></tr>";	
 	}
 ?>

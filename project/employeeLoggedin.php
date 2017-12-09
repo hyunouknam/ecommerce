@@ -80,6 +80,7 @@
 			mysqli_query($conn,$sql);
 	}
 	 if (isset($_POST['update'])){
+
 		$sql_update="UPDATE inventory SET ItemName = "."'".$_POST['ItemName'] ."',"." Price= ". $_POST['ItemPrice'] .","." Quantity = ". $_POST['Quantity']." WHERE ItemId = ".$_POST['hidden_ItemId'] .";";
 		echo $sql_update;
 		$dbServername="localhost";
@@ -139,6 +140,7 @@
 		echo "<div class='main-wrapper'>";
 		echo "<h2>Add items to inventory</h2>";
 		echo "<form class='employee-form'  method='POST'>";
+		echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 		echo "<input type='text' name='SellerId' placeholder='SellerId' required>";
 		echo "<input type='text' name='ItemName' placeholder='ItemName' required>";
 		echo "<input type='text' name='Price' placeholder='Price' required>";
