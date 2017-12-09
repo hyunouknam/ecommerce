@@ -1,6 +1,5 @@
 <?php
 	include_once 'header.php'; 
-	session_start();
 	if (isset($_SESSION['isCustomerLogin'])){
 		$duration=$_SESSION['isCustomerLogin']['duration'];
 		$start =$_SESSION['isCustomerLogin']['start'];
@@ -74,12 +73,14 @@
 		echo "<td>" .$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=text name= Quantity value= ". $_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ".$_SESSION['productsAdded'][$i][1]. " </td>";
-		echo "<td>" ."<input type=submit name= update_shoppingcart value= update_quantity ". " </td>";
+		echo "<td>" ."<input type=submit name= update_shoppingcart value= Update quantity ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
 	}
-	echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
-	echo "<table border=1> <tr><th>".$totalChargeForItems."</th></tr>";	
+	echo "<table border=1> <tr><th>TOTAL CHARGE IS " .$totalChargeForItems. "</th></tr>";
+	$_SESSION['totalCharge'] = $totalChargeForItems;
+	echo $_SESSION['totalCharge'];
+	//echo "<table border=1> <tr><th>".$totalChargeForItems."</th></tr>";	
 	}
 	if (isset($_POST['update_shoppingcart'])){
 		$myData=$_SESSION['searchResults'];
@@ -95,7 +96,7 @@
 ?>
 <div class ="See what's in the shopping cart">
 	<form method='POST' action= 'addShoppingCart.php'>
-	<input type='submit' name= 'ShoppingCart' value='ShoppingCart' >
+	<input type='submit' name= 'ShoppingCart' value='Shopping Cart' >
 	<input type='submit' name= 'submit_logout' value='Logout' >
 	</form>
 </div>
@@ -103,7 +104,7 @@
 
 <div class ="checkout">
 	<form method='POST' action= 'checkoutOrKeepShopping.php'>
-	<input type='submit' name= 'keepsearch' value='KEEPshoping' >
+	<input type='submit' name= 'keepsearch' value='Keep Shopping' >
 	<input type='submit' name= 'checkout' value='CHECKOUT' >
 	</form>
 </div>
@@ -123,12 +124,12 @@
 		echo "<td>" .$_SESSION['productsAdded'][$i][4]*$_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=text name= Quantity value= ". $_SESSION['productsAdded'][$i][5]. " </td>";
 		echo "<td>" ."<input type=hidden name= hidden_ItemId value= ".$_SESSION['productsAdded'][$i][1]. " </td>";
-		echo "<td>" ."<input type=submit name= update_shoppingcart value= update_quantity ". " </td>";
+		echo "<td>" ."<input type=submit name= update_shoppingcart value= Update quantity ". " </td>";
 		echo "</tr>";
 		echo "</form>"; 
 		}
-		echo "<table border=1> <tr><th>TOTAL CHARGE IS</th></tr>";	
-		echo "<table border=1> <tr><th>".$totalChargeForItems."</th></tr>";	
+		echo "<table border=1> <tr><th>TOTAL CHARGE IS ".$totalChargeForItems."</th></tr>";	
+		//echo "<table border=1> <tr><th>".$totalChargeForItems."</th></tr>";	
 	}
 	else if(isset($_POST['submit_logout'])){
 		echo "You are logged out! Redirecting you to the homepage!";

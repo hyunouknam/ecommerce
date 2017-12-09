@@ -81,6 +81,7 @@
 	<div class="main-wrapper">
 		<form class="sellerfunction"  method="POST" >
 			<input type='submit' value='Update customer information' name='submit_updateCustomer' >
+			<input type='submit' value='See shopping cart' name='view_shoppingcart' >
 			<input type='submit' value='View customer orders' name='view_customer_orders' >
 			<input type='submit' value='Logout' name='submit_logout' >
 		</form>
@@ -122,6 +123,9 @@
 		echo "</form>"; 
 	}
 		
+	} else if(isset($_POST['view_shoppingcart'])){
+		header( "Location: addshoppingcart.php" );
+
 	}
 	else if(isset($_POST['submit_logout'])){
 		echo "You are logged out! Now redirecting you to the homepage!";
